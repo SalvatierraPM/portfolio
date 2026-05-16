@@ -101,7 +101,7 @@ nav.solid {
 canvas#hero-c {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
-  opacity: .5;
+  opacity: .72;
 }
 .hero-inner {
   position: relative; z-index: 2;
@@ -159,7 +159,7 @@ canvas#hero-c {
   display: inline-flex; gap: 4rem;
   animation: scroll-reel 28s linear infinite;
   font-family: var(--fm); font-size: .62rem; letter-spacing: .14em;
-  text-transform: uppercase; color: var(--dim);
+  text-transform: uppercase; color: var(--muted);
 }
 .reel-track span { color: var(--acc); }
 @keyframes scroll-reel {
@@ -673,7 +673,7 @@ canvas#hero-c {
 }
 .demo-open:hover { color: var(--acc); border-color: var(--acc); }
 .demo-iframe {
-  width: 100%; height: 260px;
+  width: 100%; height: 420px;
   border: none; display: block;
   background: #000;
   pointer-events: none; /* prevent scroll hijack, click ↗ to open */
@@ -690,7 +690,7 @@ canvas#hero-c {
 }
 @media(max-width:640px) {
   .demos-row { grid-template-columns: 1fr !important; }
-  .demo-iframe { height: 200px; }
+  .demo-iframe { height: 280px; }
 }
 .lab-text-desc {
   font-size: .75rem; color: var(--muted); line-height: 1.4;
@@ -713,6 +713,64 @@ canvas#hero-c {
   .lab-item--g, .lab-item--h { grid-column: span 1; grid-row: span 1; }
 }
 
+
+/* ── AIOS WIDGET ── */
+.aios-widget {
+  background: var(--surf); border: 1px solid var(--bdr2);
+  border-radius: 12px; padding: 2rem;
+  font-family: var(--fm); line-height: 1.8;
+}
+.aios-widget-header {
+  font-size: .62rem; letter-spacing: .1em; color: var(--dim);
+  margin-bottom: 1.5rem; text-transform: uppercase;
+}
+.aios-stats-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+}
+.aios-stat-label {
+  font-size: .58rem; letter-spacing: .1em; color: var(--dim);
+  margin-bottom: .5rem; text-transform: uppercase;
+}
+.aios-stat-n {
+  font-family: var(--fd); font-weight: 900;
+  font-size: 2.5rem; letter-spacing: -0.04em;
+  color: var(--acc); line-height: 1;
+}
+.aios-stat-green { color: #22c55e; }
+.aios-stat-desc { font-size: .75rem; color: var(--muted); margin-top: .25rem; }
+.aios-runs {
+  margin-top: 2rem; padding-top: 1.5rem;
+  border-top: 1px solid var(--bdr);
+}
+.aios-runs-label {
+  font-size: .58rem; letter-spacing: .1em; color: var(--dim);
+  margin-bottom: .75rem; text-transform: uppercase;
+}
+.aios-tags { display: flex; flex-wrap: wrap; gap: .4rem; }
+
+/* lang-btn proper CSS */
+#lang-btn {
+  font-family: var(--fm); font-size: .62rem; letter-spacing: .1em;
+  border: 1px solid var(--bdr2); padding: .2rem .55rem; border-radius: 4px;
+  color: var(--muted); cursor: pointer; background: none;
+  transition: border-color .15s, color .15s;
+}
+#lang-btn:hover { border-color: var(--acc); color: var(--acc); }
+
+/* hero tagline bridge */
+.hero-tagline {
+  font-family: var(--fd); font-weight: 500;
+  font-size: clamp(1rem, .6rem + 1.5vw, 1.6rem);
+  letter-spacing: -0.02em; color: var(--muted);
+  margin-bottom: 2rem; line-height: 1.4;
+}
+
+/* live case badge accent */
+.case-role-live {
+  border-color: color-mix(in srgb, var(--acc) 35%, transparent) !important;
+  color: var(--acc) !important;
+}
+
 /* reduced motion */
 @media(prefers-reduced-motion:reduce) {
   .reveal, .reveal-left, .reveal-right { opacity: 1; transform: none; transition: none; }
@@ -730,7 +788,7 @@ canvas#hero-c {
     <a href="#work">Work</a>
     <a href="#stack">Stack</a>
     <a href="#about">About</a>
-    <button onclick="toggleLang()" id="lang-btn" style="font-family:var(--fm);font-size:.6rem;letter-spacing:.1em;border:1px solid var(--bdr2);padding:.2rem .55rem;border-radius:4px;color:var(--muted);cursor:pointer;background:none;transition:all .15s" onmouseover="this.style.borderColor='var(--acc)';this.style.color='var(--acc)'" onmouseout="this.style.borderColor='var(--bdr2)';this.style.color='var(--muted)'">ES</button>
+    <button onclick="toggleLang()" id="lang-btn">ES</button>
     <a class="nav-cta" href="mailto:pablo@daseinfs.com">Contact</a>
   </div>
 </nav>
@@ -746,8 +804,12 @@ canvas#hero-c {
     </div>
     <h1 class="hero-name reveal">
       Pablo<br>
-      Mo<span>raga</span>
+      <span>Moraga</span>
     </h1>
+    <p class="hero-tagline reveal" style="transition-delay:.12s">
+      <span class="en">Frontend · AI infrastructure · Generative art</span>
+      <span class="es">Frontend · Infraestructura IA · Arte generativo</span>
+    </p>
     <div class="hero-meta reveal">
       <div class="hero-role en">Designer &amp; Builder · Santiago, Chile</div>
       <div class="hero-role es">Diseñador &amp; Constructor · Santiago, Chile</div>
@@ -802,8 +864,8 @@ canvas#hero-c {
 <div class="intro-section" id="work">
   <div class="intro-grid">
     <h2 class="intro-title reveal-left">
-      <span class="en">I build the things I design.</span>
-      <span class="es">Construyo lo que diseño.</span>
+      <span class="en">I <span class="acc">build</span> the things I design.</span>
+      <span class="es"><span class="acc">Construyo</span> lo que diseño.</span>
     </h2>
     <div class="intro-body reveal-right">
       <p class="en">Product manager turned full-stack builder. I move across the entire stack — from pixel to pipeline, from WebGL shader to multi-agent AI system. Every project here is something I built myself, usually with Claude Code.</p>
@@ -1024,52 +1086,51 @@ canvas#hero-c {
       </div>
     </div>
     <div class="case-visual reveal-right">
-      <!-- Terminal-style stat display instead of screenshot -->
-      <div style="background:var(--surf);border:1px solid var(--bdr2);border-radius:12px;padding:2rem;font-family:var(--fm);font-size:.78rem;line-height:1.8">
-        <div style="color:var(--dim);margin-bottom:1.5rem;font-size:.62rem;letter-spacing:.1em">SYSTEM STATUS — DASEIN AI OS</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem">
-          <div>
-            <div style="color:var(--dim);font-size:.58rem;letter-spacing:.1em;margin-bottom:.5rem">AGENTS</div>
-            <div style="color:var(--acc);font-size:2.5rem;font-family:var(--fd);font-weight:900;letter-spacing:-0.04em;line-height:1">15+</div>
-            <div style="color:var(--muted);font-size:.75rem;margin-top:.25rem">specialized Claude agents</div>
+      <div class="aios-widget">
+        <div class="aios-widget-header">SYSTEM STATUS — DASEIN AI OS</div>
+        <div class="aios-stats-grid">
+          <div class="aios-stat">
+            <div class="aios-stat-label">AGENTS</div>
+            <div class="aios-stat-n">15+</div>
+            <div class="aios-stat-desc">specialized Claude agents</div>
           </div>
-          <div>
-            <div style="color:var(--dim);font-size:.58rem;letter-spacing:.1em;margin-bottom:.5rem">MCP SERVERS</div>
-            <div style="color:var(--acc);font-size:2.5rem;font-family:var(--fd);font-weight:900;letter-spacing:-0.04em;line-height:1">10</div>
-            <div style="color:var(--muted);font-size:.75rem;margin-top:.25rem">Slack, Linear, Obsidian, GitHub…</div>
+          <div class="aios-stat">
+            <div class="aios-stat-label">MCP SERVERS</div>
+            <div class="aios-stat-n">10</div>
+            <div class="aios-stat-desc">Slack, Linear, Obsidian, GitHub…</div>
           </div>
-          <div>
-            <div style="color:var(--dim);font-size:.58rem;letter-spacing:.1em;margin-bottom:.5rem">SKILLS</div>
-            <div style="color:var(--acc);font-size:2.5rem;font-family:var(--fd);font-weight:900;letter-spacing:-0.04em;line-height:1">55</div>
-            <div style="color:var(--muted);font-size:.75rem;margin-top:.25rem">reusable agent modules</div>
+          <div class="aios-stat">
+            <div class="aios-stat-label">SKILLS</div>
+            <div class="aios-stat-n">55</div>
+            <div class="aios-stat-desc">reusable agent modules</div>
           </div>
-          <div>
-            <div style="color:var(--dim);font-size:.58rem;letter-spacing:.1em;margin-bottom:.5rem">MEMORY DRAWERS</div>
-            <div style="color:var(--acc);font-size:2.5rem;font-family:var(--fd);font-weight:900;letter-spacing:-0.04em;line-height:1">7,960</div>
-            <div style="color:var(--muted);font-size:.75rem;margin-top:.25rem">MemPalace + Claude memory</div>
+          <div class="aios-stat">
+            <div class="aios-stat-label">MEMORY DRAWERS</div>
+            <div class="aios-stat-n">7,960</div>
+            <div class="aios-stat-desc">MemPalace + Claude memory</div>
           </div>
-          <div>
-            <div style="color:var(--dim);font-size:.58rem;letter-spacing:.1em;margin-bottom:.5rem">CRON PIPELINES</div>
-            <div style="color:var(--acc);font-size:2.5rem;font-family:var(--fd);font-weight:900;letter-spacing:-0.04em;line-height:1">10</div>
-            <div style="color:var(--muted);font-size:.75rem;margin-top:.25rem">autonomous, crontab-scheduled</div>
+          <div class="aios-stat">
+            <div class="aios-stat-label">CRON PIPELINES</div>
+            <div class="aios-stat-n">10</div>
+            <div class="aios-stat-desc">autonomous, crontab-scheduled</div>
           </div>
-          <div>
-            <div style="color:var(--dim);font-size:.58rem;letter-spacing:.1em;margin-bottom:.5rem">INFRA COST</div>
-            <div style="color:#22c55e;font-size:2.5rem;font-family:var(--fd);font-weight:900;letter-spacing:-0.04em;line-height:1">$0</div>
-            <div style="color:var(--muted);font-size:.75rem;margin-top:.25rem">fully local agent execution</div>
+          <div class="aios-stat">
+            <div class="aios-stat-label">INFRA COST</div>
+            <div class="aios-stat-n aios-stat-green">$0</div>
+            <div class="aios-stat-desc">fully local agent execution</div>
           </div>
         </div>
-        <div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--bdr)">
-          <div style="color:var(--dim);font-size:.58rem;letter-spacing:.1em;margin-bottom:.75rem">WHAT IT RUNS</div>
-          <div style="display:flex;flex-wrap:wrap;gap:.4rem">
-            <span style="padding:.2rem .6rem;border:1px solid var(--bdr);border-radius:3px;font-size:.58rem;color:var(--muted)">CRM updates</span>
-            <span style="padding:.2rem .6rem;border:1px solid var(--bdr);border-radius:3px;font-size:.58rem;color:var(--muted)">Simulation pipelines</span>
-            <span style="padding:.2rem .6rem;border:1px solid var(--bdr);border-radius:3px;font-size:.58rem;color:var(--muted)">Finance tracking</span>
-            <span style="padding:.2rem .6rem;border:1px solid var(--bdr);border-radius:3px;font-size:.58rem;color:var(--muted)">Content creation</span>
-            <span style="padding:.2rem .6rem;border:1px solid var(--bdr);border-radius:3px;font-size:.58rem;color:var(--muted)">Vault sync</span>
-            <span style="padding:.2rem .6rem;border:1px solid var(--bdr);border-radius:3px;font-size:.58rem;color:var(--muted)">Signal monitoring</span>
-            <span style="padding:.2rem .6rem;border:1px solid var(--bdr);border-radius:3px;font-size:.58rem;color:var(--muted)">Linear issues</span>
-            <span style="padding:.2rem .6rem;border:1px solid var(--bdr);border-radius:3px;font-size:.58rem;color:var(--muted)">Slack routing</span>
+        <div class="aios-runs">
+          <div class="aios-runs-label">WHAT IT RUNS</div>
+          <div class="aios-tags">
+            <span class="case-tag">CRM updates</span>
+            <span class="case-tag">Simulation pipelines</span>
+            <span class="case-tag">Finance tracking</span>
+            <span class="case-tag">Content creation</span>
+            <span class="case-tag">Vault sync</span>
+            <span class="case-tag">Signal monitoring</span>
+            <span class="case-tag">Linear issues</span>
+            <span class="case-tag">Slack routing</span>
           </div>
         </div>
       </div>
