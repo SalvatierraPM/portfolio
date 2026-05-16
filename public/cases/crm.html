@@ -254,7 +254,13 @@
 <script>
 const ro = new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('on');ro.unobserve(x.target)}})},{threshold:.08});
 document.querySelectorAll('.r').forEach(el=>ro.observe(el));
-function openLb(src){document.getElementById('lb-img').src=src;document.getElementById('lb').classList.add('open');document.body.style.overflow='hidden'}
+function openLb(src){
+  // Only allow relative image paths — block javascript: data: and absolute URLs
+  if(!/^[a-zA-Z0-9._/\-]+\.(png|jpe?g|gif|webp|svg)$/i.test(src)){return;}
+  document.getElementById('lb-img').src=src;
+  document.getElementById('lb').classList.add('open');
+  document.body.style.overflow='hidden';
+}
 function closeLb(){document.getElementById('lb').classList.remove('open');document.body.style.overflow=''}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLb()});
 </script>
