@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Dasein CRM — Pablo Moraga</title>
+<meta name="description" content="AI-native CRM with 3D force-directed relationship graph and Claude Sonnet streaming chat."/>
+<link rel="stylesheet" href="case.css"/>
+</head>
+<body>
+
+<nav class="case-nav">
+  <a class="case-nav-back" href="../../../index.html">← Portfolio</a>
+  <span class="case-nav-title">Dasein CRM</span>
+  <div class="case-nav-links">
+    <a href="#overview">Overview</a>
+    <a href="#graph">3D Graph</a>
+    <a href="#ai">AI Chat</a>
+    <a href="#intel">Intelligence</a>
+    <a href="#tech">Tech</a>
+  </div>
+</nav>
+
+<div class="case-hero">
+  <div class="case-eyebrow">Full-Stack · AI-Native · Supabase · Vercel</div>
+  <h1 class="case-h1">Dasein<br><span>CRM</span></h1>
+  <div class="case-summary">
+    <div class="case-summary-desc r">
+      <p>A CRM built entirely with <strong>Claude Code</strong> — no Figma mockups, no external designers. It started as a simple contact tracker and grew into a full intelligence platform with a 3D relationship graph, streaming AI chat, and a market entry intelligence module.</p>
+      <p>The design principle: <strong>every view is queryable</strong>. Instead of navigating menus, you ask Claude. "Who are our warm prospects in banking?" returns a filtered view in natural language.</p>
+      <div class="tech-row">
+        <span class="tech-tag hi">Astro 6</span>
+        <span class="tech-tag hi">Vue.js</span>
+        <span class="tech-tag hi">Supabase</span>
+        <span class="tech-tag hi">3D Force Graph</span>
+        <span class="tech-tag hi">Anthropic SDK</span>
+        <span class="tech-tag">Three.js</span>
+        <span class="tech-tag">TypeScript</span>
+        <span class="tech-tag">Vercel</span>
+        <span class="tech-tag">PostgreSQL + RLS</span>
+      </div>
+    </div>
+    <div class="case-meta-grid r">
+      <div class="case-meta-item">
+        <div class="case-meta-label">Status</div>
+        <div class="case-meta-value">Live · dasein-dashboard.netlify.app</div>
+      </div>
+      <div class="case-meta-item">
+        <div class="case-meta-label">Built with</div>
+        <div class="case-meta-value">Claude Code · zero external devs</div>
+      </div>
+      <div class="case-meta-item">
+        <div class="case-meta-label">AI Model</div>
+        <div class="case-meta-value">Claude Sonnet · streaming</div>
+      </div>
+      <div class="case-meta-item">
+        <div class="case-meta-label">Graph nodes</div>
+        <div class="case-meta-value">Contacts · Orgs · Deals · Signals</div>
+      </div>
+      <div class="case-meta-item">
+        <div class="case-meta-label">Auth</div>
+        <div class="case-meta-value">Supabase Auth · server-side RLS</div>
+      </div>
+      <div class="case-meta-item">
+        <div class="case-meta-label">Users</div>
+        <div class="case-meta-value">Pablo + Alfi · team access</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="scroll-hint"><div class="scroll-arrow"></div></div>
+
+<div class="case-body">
+
+  <!-- MARKET INTELLIGENCE MODULE -->
+  <div class="block sdiv" id="overview">
+    <div class="block-label">01 — Market Intelligence Module</div>
+    <h2 class="block-title r">Not just contacts.<br>Decision intelligence.</h2>
+    <div class="block-body r">
+      <p>The market entry module is the most data-dense view. It aggregates competitor analysis, prospect rankings, signal feeds, and priority matrices into a single scrollable dashboard — all built inside the CRM as an embedded module.</p>
+      <p><strong>The insight that drove the design:</strong> a CRM shouldn't just store contacts. It should help you decide who to call next and why.</p>
+    </div>
+
+    <div class="ss-full r">
+      <img src="../ss/market-dashboard.png" alt="Dasein CRM — Market Entry Intelligence Dashboard" loading="lazy" onclick="openLb(this.src)"/>
+    </div>
+    <p class="ss-cap">Market Entry Dashboard — competitor ranking, priority matrix, signal feed, decision recommendations</p>
+
+    <div class="ss-full r" style="margin-top:1.25rem">
+      <img src="../ss/market-research.png" alt="Dasein CRM — Research Mode" loading="lazy" onclick="openLb(this.src)"/>
+    </div>
+    <p class="ss-cap">Research mode — full competitive landscape, partner channels, prospect signals, outreach priorities</p>
+  </div>
+
+  <!-- 3D GRAPH -->
+  <div class="block sdiv" id="graph">
+    <div class="block-label">02 — 3D Relationship Graph</div>
+    <h2 class="block-title r">Every relationship<br>in one space.</h2>
+    <div class="block-body r">
+      <p>The standout feature: a <strong>force-directed 3D graph</strong> that maps every contact, organization, deal, and signal as a node in 3D space. Edges represent relationships — "introduced by", "works at", "connected to deal", "linked to signal".</p>
+      <p>Built with <strong>3D Force Graph</strong> (a Three.js wrapper) + a custom layout engine that runs in a Web Worker to keep the UI at 60fps even with 200+ nodes.</p>
+      <p>You can orbit, zoom, click any node to see its details, and filter by type. Hovering an edge shows the relationship metadata inline.</p>
+    </div>
+
+    <div class="browser-wrap r">
+      <div class="browser-topbar">
+        <div class="b-dot"></div><div class="b-dot"></div><div class="b-dot"></div>
+        <div class="b-url">SignalTwin — Knowledge Graph · localhost:3000</div>
+      </div>
+      <img src="../ss/signaltwin-graph.png" alt="3D Force-Directed Relationship Graph" loading="lazy" onclick="openLb(this.src)"/>
+    </div>
+    <p class="ss-cap">3D force-directed graph — contacts, organizations, deals, signals as nodes in 3D space · Three.js + 3D Force Graph</p>
+
+    <div class="callout r">
+      <strong>Why 3D?</strong> In a flat list you lose relationship context. In 3D, clusters emerge naturally — you can see "these 4 people all know each other through this org" at a glance, without any manual grouping.
+    </div>
+
+    <div class="ss-placeholder r">
+      <div class="ss-placeholder-icon">📸</div>
+      <div class="ss-placeholder-text">Add CRM Graph Screenshot</div>
+      <div class="ss-placeholder-hint">Capture the full CRM graph view with nodes labeled — contacts, orgs, deals visible. Replace this block with: <code style="font-family:var(--fm);font-size:.7rem;color:var(--acc)">&lt;img src="your-screenshot.png"/&gt;</code></div>
+    </div>
+  </div>
+
+  <!-- AI CHAT -->
+  <div class="block sdiv" id="ai">
+    <div class="block-label">03 — Claude Sonnet Chat Interface</div>
+    <h2 class="block-title r">Query your CRM<br>in plain language.</h2>
+    <div class="block-body r">
+      <p>Integrated a <strong>streaming Claude Sonnet chat</strong> directly inside the CRM. The assistant has access to the full database schema and can answer questions like:</p>
+      <ul style="margin:.75rem 0 .75rem 1.25rem;color:var(--muted);font-size:.92rem;line-height:1.9">
+        <li>"Who are the warmest prospects this week?"</li>
+        <li>"Which contacts haven't we talked to in 30 days?"</li>
+        <li>"Summarize all interactions with Banco Chile"</li>
+        <li>"What signals are relevant to our banking pipeline?"</li>
+      </ul>
+      <p>Built with the <strong>Anthropic SDK streaming API</strong> — responses appear token by token, with a custom bubble component (`ForesightAgentBubble.astro`) that handles markdown rendering inline.</p>
+    </div>
+
+    <div class="ss-placeholder r">
+      <div class="ss-placeholder-icon">📸</div>
+      <div class="ss-placeholder-text">Add Claude Chat Screenshot</div>
+      <div class="ss-placeholder-hint">Capture the chat interface with a real conversation visible — the streaming response, the bubble layout. Best captured from the CRM at localhost:8888/chat</div>
+    </div>
+
+    <div class="tech-row r">
+      <span class="tech-tag hi">Anthropic SDK</span>
+      <span class="tech-tag hi">Streaming API</span>
+      <span class="tech-tag">Claude Sonnet 4.6</span>
+      <span class="tech-tag">Markdown rendering</span>
+      <span class="tech-tag">Supabase context injection</span>
+    </div>
+  </div>
+
+  <!-- PIPELINE + CONTACTS -->
+  <div class="block sdiv" id="pipeline">
+    <div class="block-label">04 — Pipeline + Contacts</div>
+    <h2 class="block-title r">Standard CRM features,<br>non-standard execution.</h2>
+    <div class="block-body r">
+      <p>Beyond the graph and AI, it's a fully functional CRM: <strong>pipeline management</strong> (kanban-style stages), <strong>contact profiles</strong> with interaction history, <strong>meeting tracker</strong>, and <strong>organization hierarchy</strong>.</p>
+      <p>Everything is backed by <strong>Supabase PostgreSQL with row-level security</strong> — multi-user from day one. Alfi and I both access the same data without conflicts.</p>
+    </div>
+
+    <div class="ss-2col r">
+      <div>
+        <div class="ss-placeholder">
+          <div class="ss-placeholder-icon">📸</div>
+          <div class="ss-placeholder-text">Contacts List</div>
+          <div class="ss-placeholder-hint">Capture the contacts page — the table view with tags, last contact, pipeline stage</div>
+        </div>
+        <p class="ss-cap">Contacts list — search, filter by stage, last interaction</p>
+      </div>
+      <div>
+        <div class="ss-placeholder">
+          <div class="ss-placeholder-icon">📸</div>
+          <div class="ss-placeholder-text">Pipeline Kanban</div>
+          <div class="ss-placeholder-hint">Capture the pipeline page — kanban columns, deal cards, progress</div>
+        </div>
+        <p class="ss-cap">Pipeline — Kanban stages with deal cards and progress</p>
+      </div>
+    </div>
+
+    <div class="stat-row r">
+      <div class="stat-item">
+        <div class="stat-n">6</div>
+        <div class="stat-l">Actor types tracked</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-n">2</div>
+        <div class="stat-l">Active users (Pablo + Alfi)</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-n">RLS</div>
+        <div class="stat-l">Supabase row-level security</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-n">0</div>
+        <div class="stat-l">External design tools used</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TECH BREAKDOWN -->
+  <div class="block sdiv" id="tech">
+    <div class="block-label">05 — Technical Breakdown</div>
+    <h2 class="block-title r">How it's built.</h2>
+
+    <div class="ss-2col r">
+      <div>
+        <p style="font-family:var(--fm);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin-bottom:.75rem">Frontend</p>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:.5rem">
+          <li style="font-size:.88rem;color:var(--muted)"><span style="color:var(--dim);font-size:.65rem;font-family:var(--fm)">FRAMEWORK</span> Astro 6 — static shell + Vue islands</li>
+          <li style="font-size:.88rem;color:var(--muted)"><span style="color:var(--dim);font-size:.65rem;font-family:var(--fm)">3D</span> 3D Force Graph + Three.js</li>
+          <li style="font-size:.88rem;color:var(--muted)"><span style="color:var(--dim);font-size:.65rem;font-family:var(--fm)">STATE</span> Vue 3 Composition API</li>
+          <li style="font-size:.88rem;color:var(--muted)"><span style="color:var(--dim);font-size:.65rem;font-family:var(--fm)">STYLE</span> CSS Custom Properties — no Tailwind</li>
+          <li style="font-size:.88rem;color:var(--muted)"><span style="color:var(--dim);font-size:.65rem;font-family:var(--fm)">DEPLOY</span> Netlify + Vercel</li>
+        </ul>
+      </div>
+      <div>
+        <p style="font-family:var(--fm);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin-bottom:.75rem">Backend & Data</p>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:.5rem">
+          <li style="font-size:.88rem;color:var(--muted)"><span style="color:var(--dim);font-size:.65rem;font-family:var(--fm)">DB</span> Supabase PostgreSQL</li>
+          <li style="font-size:.88rem;color:var(--muted)"><span style="color:var(--dim);font-size:.65rem;font-family:var(--fm)">AUTH</span> Supabase Auth — server-side sessions</li>
+          <li style="font-size:.88rem;color:var(--muted)"><span style="color:var(--dim);font-size:.65rem;font-family:var(--fm)">SECURITY</span> Row Level Security on all tables</li>
+          <li style="font-size:.88rem;color:var(--muted)"><span style="color:var(--dim);font-size:.65rem;font-family:var(--fm)">AI</span> Anthropic SDK — streaming responses</li>
+          <li style="font-size:.88rem;color:var(--muted)"><span style="color:var(--dim);font-size:.65rem;font-family:var(--fm)">API</span> Astro server endpoints</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout r" style="margin-top:2rem">
+      <strong>Built entirely with Claude Code</strong> — from the initial schema design to the 3D graph integration to the streaming chat. No external developers, no Figma. The whole thing was shipped in parallel with running Dasein Foresight as a company.
+    </div>
+  </div>
+
+</div><!-- /case-body -->
+
+<div class="case-footer">
+  <span class="case-footer-l">Dasein CRM — Pablo Moraga</span>
+  <div class="case-footer-r">
+    <a href="https://github.com/SalvatierraPM/dasein-crm" target="_blank" rel="noopener">GitHub</a>
+    <a href="../../../index.html#work">Back to work</a>
+    <a href="signaltwin.html">Next: SignalTwin →</a>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lb" id="lb" onclick="closeLb()">
+  <div class="lb-close">✕</div>
+  <img id="lb-img" src="" alt=""/>
+</div>
+
+<script>
+const ro = new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('on');ro.unobserve(x.target)}})},{threshold:.08});
+document.querySelectorAll('.r').forEach(el=>ro.observe(el));
+function openLb(src){document.getElementById('lb-img').src=src;document.getElementById('lb').classList.add('open');document.body.style.overflow='hidden'}
+function closeLb(){document.getElementById('lb').classList.remove('open');document.body.style.overflow=''}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLb()});
+</script>
+</body>
+</html>
