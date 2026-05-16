@@ -79,11 +79,11 @@ nav.solid {
 .nav-links a { transition: color .15s; font-weight: 500; }
 .nav-links a:hover { color: var(--txt); }
 .nav-cta {
-  background: var(--acc) !important; color: var(--bg) !important;
+  background: var(--acc); color: var(--bg);
   padding: .4rem 1rem; border-radius: 6px; font-weight: 600;
-  font-size: .82rem; transition: background .15s !important;
+  font-size: .82rem; transition: background .15s;
 }
-.nav-cta:hover { background: var(--acc2) !important; }
+.nav-cta:hover { background: var(--acc2); }
 @media(max-width:640px) {
   nav { padding: 1rem 1.25rem; }
   .nav-links { gap: 1rem; }
@@ -186,7 +186,7 @@ canvas#hero-c {
 }
 .intro-grid {
   display: grid; grid-template-columns: 1fr 1fr;
-  gap: 6rem; align-items: start;
+  gap: 4rem; align-items: start;
 }
 .intro-title {
   font-family: var(--fd); font-weight: 900;
@@ -199,7 +199,7 @@ canvas#hero-c {
   padding-top: .5rem;
 }
 .intro-body p { font-size: 1.05rem; color: var(--muted); line-height: 1.75; }
-.intro-body strong { color: var(--txt); font-weight: 600; }
+.intro-body strong { color: var(--acc2); font-weight: 600; }
 @media(max-width:768px) {
   .intro-grid { grid-template-columns: 1fr; gap: 2.5rem; }
 }
@@ -418,7 +418,7 @@ canvas#hero-c {
 .about-copy p { font-size: .97rem; color: var(--muted); line-height: 1.75; }
 .about-copy strong { color: var(--txt); font-weight: 600; }
 .about-copy .aside {
-  font-size: .85rem !important; color: var(--dim) !important;
+  font-size: .85rem; color: var(--dim);
   font-style: italic; border-left: 2px solid var(--bdr2);
   padding-left: .9rem;
 }
@@ -450,7 +450,7 @@ canvas#hero-c {
   letter-spacing: -0.045em; line-height: .9;
   margin-bottom: 2rem;
 }
-.contact-headline .dim { color: var(--muted); }
+.contact-headline .dim { color: var(--dim); }
 .contact-headline .acc { color: var(--acc); }
 .contact-sub {
   font-size: 1.05rem; color: var(--muted); max-width: 440px;
@@ -1470,10 +1470,10 @@ canvas#hero-c {
     </div>
     <div class="about-text reveal-right">
       <h2 class="about-headline en">
-        Building<br><span class="acc">without fear</span><br>of code.
+        <span class="acc">Building</span><br>without fear<br>of code.
       </h2>
       <h2 class="about-headline es">
-        Construyo<br><span class="acc">sin miedo</span><br>al código.
+        <span class="acc">Construyo</span><br>sin miedo<br>al código.
       </h2>
       <div class="about-copy en">
         <p>Product manager turned builder. The moment I realized I could build what I designed, I never went back.</p>
@@ -1615,6 +1615,24 @@ void main(){
 } else {
   canvas.style.background='radial-gradient(ellipse at 20% 50%,rgba(196,147,90,.08) 0%,transparent 60%)';
 }
+
+/* Scroll parallax on intro title — proves scroll-driven skill without loading GSAP */
+(function(){
+  const intro = document.querySelector('.intro-title');
+  if (!intro || window.innerWidth < 768 || window.matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const rect = intro.getBoundingClientRect();
+      const pct = Math.max(0, Math.min(1, -rect.top / (window.innerHeight * 0.6)));
+      intro.style.transform = `translateY(${pct * -28}px)`;
+      intro.style.opacity = Math.max(0.2, 1 - pct * 0.45);
+      ticking = false;
+    });
+  }, { passive: true });
+})();
 </script>
 </body>
 </html>
