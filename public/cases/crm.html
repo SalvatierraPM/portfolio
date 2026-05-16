@@ -16,7 +16,7 @@
     <a href="#overview">Overview</a>
     <a href="#graph">3D Graph</a>
     <a href="#ai">AI Chat</a>
-    <a href="#intel">Intelligence</a>
+    <a href="#pipeline">Intelligence</a>
     <a href="#tech">Tech</a>
   </div>
 </nav>
@@ -116,10 +116,10 @@
       <strong>Why 3D?</strong> In a flat list you lose relationship context. In 3D, clusters emerge naturally — you can see "these 4 people all know each other through this org" at a glance, without any manual grouping.
     </div>
 
-    <div class="ss-placeholder r">
-      <div class="ss-placeholder-icon">📸</div>
-      <div class="ss-placeholder-text">Add CRM Graph Screenshot</div>
-      <div class="ss-placeholder-hint">Capture the full CRM graph view with nodes labeled — contacts, orgs, deals visible. Replace this block with: <code style="font-family:var(--fm);font-size:.7rem;color:var(--acc)">&lt;img src="your-screenshot.png"/&gt;</code></div>
+    <div class="stat-row r" style="margin-top:1.5rem">
+      <div class="stat-item"><div class="stat-n">200+</div><div class="stat-l">nodes in live graph</div></div>
+      <div class="stat-item"><div class="stat-n">60fps</div><div class="stat-l">Web Worker layout engine</div></div>
+      <div class="stat-item"><div class="stat-n">4</div><div class="stat-l">node types (contacts, orgs, deals, signals)</div></div>
     </div>
   </div>
 
@@ -138,10 +138,13 @@
       <p>Built with the <strong>Anthropic SDK streaming API</strong> — responses appear token by token, with a custom bubble component (`ForesightAgentBubble.astro`) that handles markdown rendering inline.</p>
     </div>
 
-    <div class="ss-placeholder r">
-      <div class="ss-placeholder-icon">📸</div>
-      <div class="ss-placeholder-text">Add Claude Chat Screenshot</div>
-      <div class="ss-placeholder-hint">Capture the chat interface with a real conversation visible — the streaming response, the bubble layout. Best captured from the CRM at localhost:8888/chat</div>
+    <div class="callout r">
+      <strong>How the streaming works:</strong> the Anthropic SDK <code style="font-family:var(--fm);font-size:.82rem;color:var(--acc)">stream()</code> method yields deltas token-by-token. Each token appends to the DOM via <code style="font-family:var(--fm);font-size:.82rem;color:var(--acc)">textContent</code> (not innerHTML — XSS safe), with a cursor element that disappears when the stream closes. Response time to first token: ~400ms on Claude Sonnet.
+    </div>
+    <div class="stat-row r">
+      <div class="stat-item"><div class="stat-n">400ms</div><div class="stat-l">time to first token</div></div>
+      <div class="stat-item"><div class="stat-n">token</div><div class="stat-l">by token streaming display</div></div>
+      <div class="stat-item"><div class="stat-n">SDK</div><div class="stat-l">Anthropic native, no wrapper</div></div>
     </div>
 
     <div class="tech-row r">
@@ -163,21 +166,25 @@
     </div>
 
     <div class="ss-2col r">
-      <div>
-        <div class="ss-placeholder">
-          <div class="ss-placeholder-icon">📸</div>
-          <div class="ss-placeholder-text">Contacts List</div>
-          <div class="ss-placeholder-hint">Capture the contacts page — the table view with tags, last contact, pipeline stage</div>
-        </div>
-        <p class="ss-cap">Contacts list — search, filter by stage, last interaction</p>
+      <div style="background:var(--surf);border:1px solid var(--bdr2);border-radius:12px;padding:1.5rem">
+        <p style="font-family:var(--fm);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--acc);margin-bottom:.75rem">Contacts module</p>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:.5rem">
+          <li style="font-size:.88rem;color:var(--muted)">Full-text search across all fields</li>
+          <li style="font-size:.88rem;color:var(--muted)">Filter by pipeline stage, last contact, tags</li>
+          <li style="font-size:.88rem;color:var(--muted)">Interaction timeline per contact</li>
+          <li style="font-size:.88rem;color:var(--muted)">LinkedIn + email fields with copy-on-click</li>
+          <li style="font-size:.88rem;color:var(--muted)">Bulk tag assignment</li>
+        </ul>
       </div>
-      <div>
-        <div class="ss-placeholder">
-          <div class="ss-placeholder-icon">📸</div>
-          <div class="ss-placeholder-text">Pipeline Kanban</div>
-          <div class="ss-placeholder-hint">Capture the pipeline page — kanban columns, deal cards, progress</div>
-        </div>
-        <p class="ss-cap">Pipeline — Kanban stages with deal cards and progress</p>
+      <div style="background:var(--surf);border:1px solid var(--bdr2);border-radius:12px;padding:1.5rem">
+        <p style="font-family:var(--fm);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--acc);margin-bottom:.75rem">Pipeline module</p>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:.5rem">
+          <li style="font-size:.88rem;color:var(--muted)">Kanban stages: Warm → Meeting → Proposal → Close</li>
+          <li style="font-size:.88rem;color:var(--muted)">Drag-and-drop stage progression</li>
+          <li style="font-size:.88rem;color:var(--muted)">Deal value + probability tracking</li>
+          <li style="font-size:.88rem;color:var(--muted)">Auto-link contacts to deals</li>
+          <li style="font-size:.88rem;color:var(--muted)">Linear DAS-XXX badge integration</li>
+        </ul>
       </div>
     </div>
 
