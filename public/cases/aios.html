@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Dasein AI OS — Pablo Moraga</title>
+<meta name="description" content="15+ autonomous agents, 10 MCP servers, 55 skills. The full automation backbone of Dasein Foresight."/>
+<link rel="stylesheet" href="case.css"/>
+</head>
+<body>
+
+<nav class="case-nav">
+  <a class="case-nav-back" href="../../../index.html">← Portfolio</a>
+  <span class="case-nav-title">Dasein AI OS</span>
+  <div class="case-nav-links">
+    <a href="#overview">Overview</a>
+    <a href="#agents">Agents</a>
+    <a href="#mcp">MCP Servers</a>
+    <a href="#memory">Memory</a>
+    <a href="#crons">Crons</a>
+  </div>
+</nav>
+
+<div class="case-hero">
+  <div class="case-eyebrow">AI Infrastructure · Claude Code · MCP Protocol · Python · Bash</div>
+  <h1 class="case-h1">Dasein<br><span>AI OS</span></h1>
+  <div class="case-summary">
+    <div class="case-summary-desc r">
+      <p>The full automation backbone of Dasein Foresight. Not a product — a <strong>personal operating system for an AI-first company</strong>. It coordinates 15+ Claude agents, 10 MCP servers, 55 reusable skills, a persistent memory system, and 10 cron pipelines — all running locally, $0 cloud agent cost.</p>
+      <p>The idea: instead of hiring a team, build the team in software. Every role that would normally require a person — CRM manager, content editor, finance tracker, research analyst — has an agent that does it autonomously or with minimal human input.</p>
+      <div class="tech-row">
+        <span class="tech-tag hi">Claude Code</span>
+        <span class="tech-tag hi">MCP Protocol</span>
+        <span class="tech-tag hi">Python</span>
+        <span class="tech-tag hi">Bash</span>
+        <span class="tech-tag">Crontab</span>
+        <span class="tech-tag">Node.js</span>
+        <span class="tech-tag">Obsidian</span>
+        <span class="tech-tag">Supabase</span>
+        <span class="tech-tag">Slack API</span>
+        <span class="tech-tag">Linear API</span>
+      </div>
+    </div>
+    <div class="case-meta-grid r">
+      <div class="case-meta-item"><div class="case-meta-label">Agents</div><div class="case-meta-value">15+ specialized Claude agents</div></div>
+      <div class="case-meta-item"><div class="case-meta-label">MCP Servers</div><div class="case-meta-value">10 active</div></div>
+      <div class="case-meta-item"><div class="case-meta-label">Skills</div><div class="case-meta-value">55 reusable modules</div></div>
+      <div class="case-meta-item"><div class="case-meta-label">Memory drawers</div><div class="case-meta-value">7,960 in MemPalace</div></div>
+      <div class="case-meta-item"><div class="case-meta-label">Cron pipelines</div><div class="case-meta-value">10 autonomous</div></div>
+      <div class="case-meta-item"><div class="case-meta-label">Infra cost</div><div class="case-meta-value">$0 agent execution</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="scroll-hint"><div class="scroll-arrow"></div></div>
+
+<div class="case-body">
+
+  <!-- ARCHITECTURE DIAGRAM -->
+  <div class="block sdiv" id="overview">
+    <div class="block-label">01 — Architecture</div>
+    <h2 class="block-title r">Every role has<br>an agent.</h2>
+    <div class="block-body r">
+      <p>The OS is structured in layers. At the bottom: <strong>data sources</strong> (Vault, Supabase, GitHub, Slack, Linear). In the middle: <strong>MCP servers</strong> that expose these data sources as tools. On top: <strong>specialized agents</strong> that compose tools into workflows. Coordinating everything: <strong>Claude Code</strong> as the orchestrator.</p>
+    </div>
+
+    <div class="browser-wrap r">
+      <div class="browser-topbar">
+        <div class="b-dot"></div><div class="b-dot"></div><div class="b-dot"></div>
+        <div class="b-url">Dasein AI OS — Architecture Diagram</div>
+      </div>
+      <img src="../ss/live/aios-diagram.jpeg" alt="Dasein AI OS Architecture" loading="lazy" onclick="openLb(this.src)"/>
+    </div>
+    <p class="ss-cap">AI OS architecture diagram — agents, MCP servers, data sources, hooks, crons</p>
+
+    <div class="browser-wrap r" style="margin-top:1.25rem">
+      <div class="browser-topbar">
+        <div class="b-dot"></div><div class="b-dot"></div><div class="b-dot"></div>
+        <div class="b-url">Dasein AI OS — Flow Diagram v2</div>
+      </div>
+      <img src="../ss/live/flows-v2.jpeg" alt="Dasein AI OS Flows v2" loading="lazy" onclick="openLb(this.src)"/>
+    </div>
+    <p class="ss-cap">Flow diagram v2 — agent routing, skill dispatch, hook system, memory pipeline</p>
+  </div>
+
+  <!-- AGENTS -->
+  <div class="block sdiv" id="agents">
+    <div class="block-label">02 — Agent Roster</div>
+    <h2 class="block-title r">15+ specialists,<br>zero payroll.</h2>
+    <div class="block-body r">
+      <p>Each agent is a <strong>CLAUDE.md file</strong> that defines role, tools, constraints, and routing rules. Agents don't share context — they're invoked with specific tasks and return structured output. This prevents context pollution and keeps each agent focused.</p>
+    </div>
+
+    <div class="ss-2col r">
+      <div>
+        <p style="font-family:var(--fm);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin-bottom:.75rem">Business Agents</p>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:.4rem">
+          <li style="font-size:.85rem;color:var(--muted);display:flex;align-items:baseline;gap:.5rem"><span style="font-family:var(--fm);font-size:.55rem;color:var(--acc)">CRM</span> dasein — CRM updates, contact routing</li>
+          <li style="font-size:.85rem;color:var(--muted);display:flex;align-items:baseline;gap:.5rem"><span style="font-family:var(--fm);font-size:.55rem;color:var(--acc)">OPS</span> agente-ops — Linear, blockers, team status</li>
+          <li style="font-size:.85rem;color:var(--muted);display:flex;align-items:baseline;gap:.5rem"><span style="font-family:var(--fm);font-size:.55rem;color:var(--acc)">CFO</span> agente-finanzas — burn, runway, credits</li>
+          <li style="font-size:.85rem;color:var(--muted);display:flex;align-items:baseline;gap:.5rem"><span style="font-family:var(--fm);font-size:.55rem;color:var(--acc)">CTO</span> agente-signaltwin — pipeline, QC, arch</li>
+          <li style="font-size:.85rem;color:var(--muted);display:flex;align-items:baseline;gap:.5rem"><span style="font-family:var(--fm);font-size:.55rem;color:var(--acc)">COMMS</span> chief-of-staff — email triage, replies</li>
+        </ul>
+      </div>
+      <div>
+        <p style="font-family:var(--fm);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin-bottom:.75rem">Engineering Agents</p>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:.4rem">
+          <li style="font-size:.85rem;color:var(--muted);display:flex;align-items:baseline;gap:.5rem"><span style="font-family:var(--fm);font-size:.55rem;color:var(--acc)">BUILD</span> build-error-resolver — TS/build fixes</li>
+          <li style="font-size:.85rem;color:var(--muted);display:flex;align-items:baseline;gap:.5rem"><span style="font-family:var(--fm);font-size:.55rem;color:var(--acc)">REVIEW</span> typescript-reviewer — code review</li>
+          <li style="font-size:.85rem;color:var(--muted);display:flex;align-items:baseline;gap:.5rem"><span style="font-family:var(--fm);font-size:.55rem;color:var(--acc)">PLAN</span> planner + architect — design decisions</li>
+          <li style="font-size:.85rem;color:var(--muted);display:flex;align-items:baseline;gap:.5rem"><span style="font-family:var(--fm);font-size:.55rem;color:var(--acc)">E2E</span> e2e-runner — Playwright test runner</li>
+          <li style="font-size:.85rem;color:var(--muted);display:flex;align-items:baseline;gap:.5rem"><span style="font-family:var(--fm);font-size:.55rem;color:var(--acc)">LOOP</span> loop-operator — autonomous loops</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ss-placeholder r" style="margin-top:1.5rem">
+      <div class="ss-placeholder-icon">📸</div>
+      <div class="ss-placeholder-text">Add Agent in Action Screenshot</div>
+      <div class="ss-placeholder-hint">Capture Claude Code running an agent — the dispatch routing, tool calls, agent output. Best shown from a CRM update or simulation run session.</div>
+    </div>
+  </div>
+
+  <!-- MCP SERVERS -->
+  <div class="block sdiv" id="mcp">
+    <div class="block-label">03 — MCP Server Layer</div>
+    <h2 class="block-title r">10 servers.<br>Every data source wired.</h2>
+    <div class="block-body r">
+      <p>The <strong>Model Context Protocol (MCP)</strong> is Anthropic's standard for giving AI agents tool access. Instead of copy-pasting data into prompts, agents call tools that fetch live data. This means agents always work with current information — not stale context.</p>
+      <p>I run 10 MCP servers locally, each exposing a different data source as callable tools. Every agent knows which servers it has access to.</p>
+    </div>
+
+    <div class="ss-3col r">
+      <div class="case-meta-item" style="border-radius:10px">
+        <div class="case-meta-label">obsidian</div>
+        <div class="case-meta-value" style="font-size:.82rem">Read/write Dasein Vault — notes, sessions, decisions</div>
+      </div>
+      <div class="case-meta-item" style="border-radius:10px">
+        <div class="case-meta-label">supabase</div>
+        <div class="case-meta-value" style="font-size:.82rem">Full CRM database access — contacts, deals, signals</div>
+      </div>
+      <div class="case-meta-item" style="border-radius:10px">
+        <div class="case-meta-label">github</div>
+        <div class="case-meta-value" style="font-size:.82rem">Repos, PRs, issues across all Dasein projects</div>
+      </div>
+      <div class="case-meta-item" style="border-radius:10px">
+        <div class="case-meta-label">linear</div>
+        <div class="case-meta-value" style="font-size:.82rem">Issues, projects, milestones — DAS-XXX tracking</div>
+      </div>
+      <div class="case-meta-item" style="border-radius:10px">
+        <div class="case-meta-label">slack</div>
+        <div class="case-meta-value" style="font-size:.82rem">Channel history, message routing, signal capture</div>
+      </div>
+      <div class="case-meta-item" style="border-radius:10px">
+        <div class="case-meta-label">playwright</div>
+        <div class="case-meta-value" style="font-size:.82rem">Browser automation — screenshots, E2E tests</div>
+      </div>
+      <div class="case-meta-item" style="border-radius:10px">
+        <div class="case-meta-label">mempalace</div>
+        <div class="case-meta-value" style="font-size:.82rem">7,960 persistent memory drawers — cross-session</div>
+      </div>
+      <div class="case-meta-item" style="border-radius:10px">
+        <div class="case-meta-label">context7</div>
+        <div class="case-meta-value" style="font-size:.82rem">Live library docs — never stale API knowledge</div>
+      </div>
+      <div class="case-meta-item" style="border-radius:10px">
+        <div class="case-meta-label">experiwall</div>
+        <div class="case-meta-value" style="font-size:.82rem">A/B testing + experiment management</div>
+      </div>
+      <div class="case-meta-item" style="border-radius:10px">
+        <div class="case-meta-label">dasein-crm</div>
+        <div class="case-meta-value" style="font-size:.82rem">Custom CRM MCP — contacts, pipeline, interactions</div>
+      </div>
+    </div>
+
+    <div class="callout r" style="margin-top:1.5rem">
+      <strong>Why MCP over RAG?</strong> RAG retrieves chunks of text that may be stale. MCP calls live APIs — the agent gets real-time data, not embeddings from last week. When the CRM agent adds a contact, it's in the database immediately, not in a vector index hours later.
+    </div>
+  </div>
+
+  <!-- MEMORY SYSTEM -->
+  <div class="block sdiv" id="memory">
+    <div class="block-label">04 — Persistent Memory</div>
+    <h2 class="block-title r">Agents that remember<br>across sessions.</h2>
+    <div class="block-body r">
+      <p>The biggest limitation of LLM agents: they forget everything when the session ends. I built a <strong>3-layer memory system</strong> that persists knowledge across days and weeks:</p>
+      <ol style="margin:.75rem 0 .75rem 1.25rem;color:var(--muted);font-size:.92rem;line-height:1.9">
+        <li><strong style="color:var(--txt)">Claude Memory files</strong> — cross-session user/project/feedback/reference notes at ~/.claude/</li>
+        <li><strong style="color:var(--txt)">MemPalace</strong> — 7,960 indexed drawers with semantic search, synced from Obsidian Vault every 2 days</li>
+        <li><strong style="color:var(--txt)">Dasein Vault</strong> — Obsidian knowledge base, the human-editable source of truth</li>
+      </ol>
+      <p>When there's a conflict between sources, <strong>Vault wins</strong> (most recent, human-verified). Memory files for behavioral rules. MemPalace for fast retrieval.</p>
+    </div>
+
+    <div class="stat-row r">
+      <div class="stat-item"><div class="stat-n">7,960</div><div class="stat-l">MemPalace drawers</div></div>
+      <div class="stat-item"><div class="stat-n">161</div><div class="stat-l">Claude memory files</div></div>
+      <div class="stat-item"><div class="stat-n">3</div><div class="stat-l">Memory layers</div></div>
+      <div class="stat-item"><div class="stat-n">2d</div><div class="stat-l">Vault → MemPalace sync interval</div></div>
+    </div>
+  </div>
+
+  <!-- CRON PIPELINES -->
+  <div class="block sdiv" id="crons">
+    <div class="block-label">05 — Autonomous Cron Pipelines</div>
+    <h2 class="block-title r">10 pipelines running<br>while I sleep.</h2>
+    <div class="block-body r">
+      <p>10 bash scripts scheduled via <strong>crontab</strong> run autonomously. No cloud scheduler, no Lambda functions — just crontab on my Mac. Each pipeline is a focused agent task with error logging and Slack notifications on failure.</p>
+    </div>
+
+    <div class="ss-2col r">
+      <div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:.5rem">
+          <li style="font-size:.85rem;color:var(--muted);display:flex;align-items:baseline;gap:.5rem;padding:.6rem .75rem;background:var(--surf);border:1px solid var(--bdr);border-radius:6px"><span style="font-family:var(--fm);font-size:.55rem;color:var(--dim);flex-shrink:0">MON 8AM</span> Gastos Tracker — finance sync</li>
+          <li style="font-size:.85rem;color:var(--muted);display:flex;align-items:baseline;gap:.5rem;padding:.6rem .75rem;background:var(--surf);border:1px solid var(--bdr);border-radius:6px"><span style="font-family:var(--fm);font-size:.55rem;color:var(--dim);flex-shrink:0">MON/THU</span> Repo Research — code scout</li>
+          <li style="font-size:.85rem;color:var(--muted);display:flex;align-items:baseline;gap:.5rem;padding:.6rem .75rem;background:var(--surf);border:1px solid var(--bdr);border-radius:6px"><span style="font-family:var(--fm);font-size:.55rem;color:var(--dim);flex-shrink:0">EVERY 2D</span> MemPalace sync — Vault → Palace</li>
+          <li style="font-size:.85rem;color:var(--muted);display:flex;align-items:baseline;gap:.5rem;padding:.6rem .75rem;background:var(--surf);border:1px solid var(--bdr);border-radius:6px"><span style="font-family:var(--fm);font-size:.55rem;color:var(--dim);flex-shrink:0">DAILY</span> Intelligence feed — signals digest</li>
+          <li style="font-size:.85rem;color:var(--muted);display:flex;align-items:baseline;gap:.5rem;padding:.6rem .75rem;background:var(--surf);border:1px solid var(--bdr);border-radius:6px"><span style="font-family:var(--fm);font-size:.55rem;color:var(--dim);flex-shrink:0">NIGHTLY</span> Batch sim runner — overnight sims</li>
+        </ul>
+      </div>
+      <div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:.5rem">
+          <li style="font-size:.85rem;color:var(--muted);display:flex;align-items:baseline;gap:.5rem;padding:.6rem .75rem;background:var(--surf);border:1px solid var(--bdr);border-radius:6px"><span style="font-family:var(--fm);font-size:.55rem;color:var(--dim);flex-shrink:0">WEEKLY</span> Bible updater — docs refresh</li>
+          <li style="font-size:.85rem;color:var(--muted);display:flex;align-items:baseline;gap:.5rem;padding:.6rem .75rem;background:var(--surf);border:1px solid var(--bdr);border-radius:6px"><span style="font-family:var(--fm);font-size:.55rem;color:var(--dim);flex-shrink:0">WEEKLY</span> CRM health check — stale contacts</li>
+          <li style="font-size:.85rem;color:var(--muted);display:flex;align-items:baseline;gap:.5rem;padding:.6rem .75rem;background:var(--surf);border:1px solid var(--bdr);border-radius:6px"><span style="font-family:var(--fm);font-size:.55rem;color:var(--dim);flex-shrink:0">DAILY</span> Slack digest — message triage</li>
+          <li style="font-size:.85rem;color:var(--muted);display:flex;align-items:baseline;gap:.5rem;padding:.6rem .75rem;background:var(--surf);border:1px solid var(--bdr);border-radius:6px"><span style="font-family:var(--fm);font-size:.55rem;color:var(--dim);flex-shrink:0">WEEKLY</span> Linear cleanup — stale issues</li>
+          <li style="font-size:.85rem;color:var(--muted);display:flex;align-items:baseline;gap:.5rem;padding:.6rem .75rem;background:var(--surf);border:1px solid var(--bdr);border-radius:6px"><span style="font-family:var(--fm);font-size:.55rem;color:var(--dim);flex-shrink:0">ON DEMAND</span> Content pipeline — LinkedIn drafts</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout r" style="margin-top:1.5rem">
+      <strong>Why crontab and not a cloud scheduler?</strong> Zero cost, zero infrastructure, zero latency. My Mac is always on. If a cron fails, I get a Slack notification within 5 minutes. Cloud schedulers add $20–50/month and a deployment step for every change.
+    </div>
+
+    <div class="ss-placeholder r" style="margin-top:1.5rem">
+      <div class="ss-placeholder-icon">📸</div>
+      <div class="ss-placeholder-text">Add Cron Output Screenshot</div>
+      <div class="ss-placeholder-hint">Capture a terminal showing crontab -l with the 10 pipelines listed, or a Slack notification from a cron run completing successfully.</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="case-footer">
+  <span class="case-footer-l">Dasein AI OS — Pablo Moraga</span>
+  <div class="case-footer-r">
+    <a href="https://github.com/SalvatierraPM/dasein-os" target="_blank" rel="noopener">GitHub</a>
+    <a href="../../../index.html#work">Back to work</a>
+    <a href="crm.html">← CRM</a>
+  </div>
+</div>
+
+<div class="lb" id="lb" onclick="closeLb()">
+  <div class="lb-close">✕</div>
+  <img id="lb-img" src="" alt=""/>
+</div>
+
+<script>
+const ro=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('on');ro.unobserve(x.target)}})},{threshold:.08});
+document.querySelectorAll('.r').forEach(el=>ro.observe(el));
+function openLb(src){document.getElementById('lb-img').src=src;document.getElementById('lb').classList.add('open');document.body.style.overflow='hidden'}
+function closeLb(){document.getElementById('lb').classList.remove('open');document.body.style.overflow=''}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLb()});
+</script>
+</body>
+</html>
