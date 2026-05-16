@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entangled - Hexagon</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: #0a0a0f;
+            font-family: 'Monaco', 'Courier New', monospace;
+        }
+
+        .info {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.4);
+            pointer-events: none;
+            line-height: 1.6;
+        }
+
+        .info .pair-id {
+            color: rgba(255, 200, 100, 0.8);
+            font-weight: bold;
+        }
+
+        .controls {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(20, 20, 30, 0.8);
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 11px;
+            backdrop-filter: blur(10px);
+        }
+
+        .controls button {
+            background: rgba(100, 100, 150, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px 0;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .controls button:hover {
+            background: rgba(150, 150, 200, 0.4);
+        }
+
+        .controls button.active {
+            background: rgba(200, 150, 100, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="info">
+        <div>entangled - hexagon</div>
+        <div class="pair-id">Hexagon distribution</div>
+    </div>
+
+    <div class="controls">
+        <button id="openPair">Open Entangled Pair</button>
+        <button id="toggleSync">Toggle Synchronization</button>
+        <button id="resetView">Reset View</button>
+    </div>
+
+    <script src="three.r157.min.js"></script>
+    <script type="module" src="entangled-hexagon.js"></script>
+</body>
+</html>
