@@ -75,11 +75,10 @@
       <span class="pipe-arrow">→</span>
       <div class="pipe-step"><span class="pipe-num">07</span> QC</div>
     </div>
-
-    <div class="ss-placeholder r">
-      <div class="ss-placeholder-icon">📸</div>
-      <div class="ss-placeholder-text">Add Vue Frontend Pipeline Screenshot</div>
-      <div class="ss-placeholder-hint">Capture the Vue step-wizard showing the pipeline in progress — graph build happening, progress indicators, the step numbers active. Localhost:3000</div>
+    <div class="stat-row r" style="margin-top:1.5rem">
+      <div class="stat-item"><div class="stat-n">7</div><div class="stat-l">pipeline stages with hard stops</div></div>
+      <div class="stat-item"><div class="stat-n">5</div><div class="stat-l">Vue step-wizard components</div></div>
+      <div class="stat-item"><div class="stat-n">0</div><div class="stat-l">garbage output — fails loudly</div></div>
     </div>
 
     <div class="callout r">
@@ -104,12 +103,6 @@
       <img src="../ss/signaltwin-graph.png" alt="SignalTwin 3D Knowledge Graph" loading="lazy" onclick="openLb(this.src)"/>
     </div>
     <p class="ss-cap">3D force-directed knowledge graph — Vue 3 + D3.js + Three.js — nodes = actors, regulations, signals</p>
-
-    <div class="ss-placeholder r" style="margin-top:1.25rem">
-      <div class="ss-placeholder-icon">📸</div>
-      <div class="ss-placeholder-text">Add Graph Detail Screenshot</div>
-      <div class="ss-placeholder-hint">Capture the graph with nodes labeled, showing the actor network for Banca Chile — regulators, banks, fintechs as clusters</div>
-    </div>
   </div>
 
   <!-- SIMULATION REPORT -->
@@ -193,11 +186,8 @@
   <div class="block sdiv" id="tech">
     <div class="block-label">05 — Architecture</div>
     <h2 class="block-title r">How the pieces<br>fit together.</h2>
-
-    <div class="ss-placeholder r">
-      <div class="ss-placeholder-icon">📸</div>
-      <div class="ss-placeholder-text">Add Architecture Diagram Screenshot</div>
-      <div class="ss-placeholder-hint">Capture the dasein-ai-os.html or ai-os-flows-v2.html which shows the full SignalTwin architecture — the agent flow diagram</div>
+    <div class="callout r">
+      <strong>Stack summary:</strong> Vue 3 (frontend wizard) → Flask REST API → Neo4j graph DB → AWS Bedrock (Claude Sonnet) → local_graph_adapter (zero-cost graph infra) → Astro static report generator → QC pipeline → deployed report. Every layer is containerized with Docker for local-first operation.
     </div>
 
     <div class="ss-2col r" style="margin-top:2rem">
