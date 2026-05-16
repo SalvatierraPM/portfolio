@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>SignalTwin — Pablo Moraga</title>
+<meta name="description" content="Multi-agent strategic simulation engine. Flask + Vue 3 + Neo4j + Claude on AWS Bedrock."/>
+<link rel="stylesheet" href="case.css"/>
+</head>
+<body>
+
+<nav class="case-nav">
+  <a class="case-nav-back" href="../../../index.html">← Portfolio</a>
+  <span class="case-nav-title">SignalTwin</span>
+  <div class="case-nav-links">
+    <a href="#pipeline">Pipeline</a>
+    <a href="#graph">Graph</a>
+    <a href="#report">Report</a>
+    <a href="#qc">QC</a>
+    <a href="#tech">Tech</a>
+  </div>
+</nav>
+
+<div class="case-hero">
+  <div class="case-eyebrow">Full-Stack · Multi-Agent · Vue 3 · Flask · Neo4j · AWS Bedrock</div>
+  <h1 class="case-h1">Signal<span>Twin</span></h1>
+  <div class="case-summary">
+    <div class="case-summary-desc r">
+      <p>A full-stack strategic simulation platform. You describe a decision problem — "How will Chilean banks react to 5 regulatory convergences in 9 months?" — and SignalTwin runs a <strong>multi-agent simulation</strong> where AI actors play real roles: regulators, executives, lobbyists, competitors.</p>
+      <p>The output is an <strong>18-section editorial foresight report</strong> with signal analysis, actor network maps, scenario trees, and recommended actions — delivered as an Astro static site with Instrument Serif editorial typography.</p>
+      <p><strong>Commercial grade QC:</strong> 4.5–4.72/5.0 across 3 industries (banking, mining, energy).</p>
+      <div class="tech-row">
+        <span class="tech-tag hi">Vue 3 + Vite</span><span class="tech-tag hi">Flask 3</span>
+        <span class="tech-tag hi">Neo4j</span><span class="tech-tag hi">AWS Bedrock</span>
+        <span class="tech-tag hi">Claude Sonnet</span>
+        <span class="tech-tag">D3.js</span><span class="tech-tag">Python 3.11</span>
+        <span class="tech-tag">Docker</span><span class="tech-tag">Astro</span>
+      </div>
+    </div>
+    <div class="case-meta-grid r">
+      <div class="case-meta-item"><div class="case-meta-label">Industries run</div><div class="case-meta-value">Banking · Mining · Energy · Urban</div></div>
+      <div class="case-meta-item"><div class="case-meta-label">QC Score</div><div class="case-meta-value">4.5–4.72 / 5.0 commercial grade</div></div>
+      <div class="case-meta-item"><div class="case-meta-label">Report sections</div><div class="case-meta-value">18 per simulation run</div></div>
+      <div class="case-meta-item"><div class="case-meta-label">Graph DB</div><div class="case-meta-value">Neo4j · local_graph_adapter</div></div>
+      <div class="case-meta-item"><div class="case-meta-label">LLM</div><div class="case-meta-value">Claude Sonnet via AWS Bedrock</div></div>
+      <div class="case-meta-item"><div class="case-meta-label">Infra cost</div><div class="case-meta-value">~$0.07–0.15 per scenario</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="scroll-hint"><div class="scroll-arrow"></div></div>
+
+<div class="case-body">
+
+  <!-- PIPELINE -->
+  <div class="block sdiv" id="pipeline">
+    <div class="block-label">01 — The 7-Stage Pipeline</div>
+    <h2 class="block-title r">Research → Signals → Graph<br>→ Ontology → Sim → Report → QC</h2>
+    <div class="block-body r">
+      <p>Every simulation runs the same 7-stage pipeline. Each stage has a <strong>hard stop</strong> — if any stage fails validation, the pipeline halts and reports exactly why. No garbage-in, garbage-out.</p>
+    </div>
+
+    <div class="pipeline r">
+      <div class="pipe-step"><span class="pipe-num">01</span> Research</div>
+      <span class="pipe-arrow">→</span>
+      <div class="pipe-step"><span class="pipe-num">02</span> Signals</div>
+      <span class="pipe-arrow">→</span>
+      <div class="pipe-step"><span class="pipe-num">03</span> Graph Build</div>
+      <span class="pipe-arrow">→</span>
+      <div class="pipe-step"><span class="pipe-num">04</span> Ontology</div>
+      <span class="pipe-arrow">→</span>
+      <div class="pipe-step"><span class="pipe-num">05</span> Simulation</div>
+      <span class="pipe-arrow">→</span>
+      <div class="pipe-step"><span class="pipe-num">06</span> Report</div>
+      <span class="pipe-arrow">→</span>
+      <div class="pipe-step"><span class="pipe-num">07</span> QC</div>
+    </div>
+
+    <div class="ss-placeholder r">
+      <div class="ss-placeholder-icon">📸</div>
+      <div class="ss-placeholder-text">Add Vue Frontend Pipeline Screenshot</div>
+      <div class="ss-placeholder-hint">Capture the Vue step-wizard showing the pipeline in progress — graph build happening, progress indicators, the step numbers active. Localhost:3000</div>
+    </div>
+
+    <div class="callout r">
+      <strong>Hard stops matter.</strong> Before SignalTwin had hard stops, simulations would complete but produce hallucinated actor names and fake signals. The entity grounding layer + postflight checks cut hallucination rate to near zero. QC went from 2.5/5 to 4.72/5.
+    </div>
+  </div>
+
+  <!-- 3D GRAPH -->
+  <div class="block sdiv" id="graph">
+    <div class="block-label">02 — Neo4j Knowledge Graph</div>
+    <h2 class="block-title r">Actors, regulations,<br>signals — in one graph.</h2>
+    <div class="block-body r">
+      <p>The knowledge graph is the brain of every simulation. It stores <strong>actors</strong> (CMF, Banco de Chile, fintech associations), <strong>regulations</strong> (Basel III, Open Finance, AML reform), <strong>signals</strong> (news, official statements, market moves), and their <strong>relationships</strong> (influences, opposes, depends-on, monitors).</p>
+      <p>The <strong>3D visualization</strong> in the Vue frontend renders this graph interactively — you can orbit, filter by node type, click a node to expand its relationships, and see how the simulation changes the graph state over time.</p>
+    </div>
+
+    <div class="browser-wrap r">
+      <div class="browser-topbar">
+        <div class="b-dot"></div><div class="b-dot"></div><div class="b-dot"></div>
+        <div class="b-url">SignalTwin — Graph Visualization · localhost:3000</div>
+      </div>
+      <img src="../ss/signaltwin-graph.png" alt="SignalTwin 3D Knowledge Graph" loading="lazy" onclick="openLb(this.src)"/>
+    </div>
+    <p class="ss-cap">3D force-directed knowledge graph — Vue 3 + D3.js + Three.js — nodes = actors, regulations, signals</p>
+
+    <div class="ss-placeholder r" style="margin-top:1.25rem">
+      <div class="ss-placeholder-icon">📸</div>
+      <div class="ss-placeholder-text">Add Graph Detail Screenshot</div>
+      <div class="ss-placeholder-hint">Capture the graph with nodes labeled, showing the actor network for Banca Chile — regulators, banks, fintechs as clusters</div>
+    </div>
+  </div>
+
+  <!-- SIMULATION REPORT -->
+  <div class="block sdiv" id="report">
+    <div class="block-label">03 — The Foresight Report</div>
+    <h2 class="block-title r">18 sections.<br>Editorial precision.</h2>
+    <div class="block-body r">
+      <p>The final output is a fully designed Astro static site. Typography: <strong>Satoshi 900 for display, Instrument Serif italic for editorial callouts</strong> — the same visual language as a high-end consulting deliverable.</p>
+      <p>Every section was designed to answer a specific question a strategist would have: What's happening? (Radar) → Why now? (Convergences) → Who moves? (Actor network) → What happens next? (Scenarios) → What do we do? (Actions)</p>
+    </div>
+
+    <div class="browser-wrap r">
+      <div class="browser-topbar">
+        <div class="b-dot"></div><div class="b-dot"></div><div class="b-dot"></div>
+        <div class="b-url">Sistema Bancario Chileno — Bancos Sistémicos</div>
+      </div>
+      <img src="../ss/cases/st-report-cover.png" alt="SignalTwin Report — Banca Chile cover" loading="lazy" onclick="openLb(this.src)"/>
+    </div>
+    <p class="ss-cap">Report cover — Banca Chilena · Bancos Sistémicos · Simulación Estratégica</p>
+
+    <div class="ss-2col r" style="margin-top:1.25rem">
+      <div>
+        <div class="ss-full">
+          <img src="../ss/cases/st-summary.png" alt="Executive summary — En 2 minutos" loading="lazy" onclick="openLb(this.src)"/>
+        </div>
+        <p class="ss-cap">"En 2 minutos" — Instrument Serif editorial italic · executive summary</p>
+      </div>
+      <div>
+        <div class="ss-full">
+          <img src="../ss/cases/st-radar.png" alt="Radar de Señales" loading="lazy" onclick="openLb(this.src)"/>
+        </div>
+        <p class="ss-cap">Radar de Señales — 21 signals curated from 200+ scanned · dot-nav sidebar</p>
+      </div>
+    </div>
+
+    <div class="ss-sidebar r" style="margin-top:1.25rem">
+      <div>
+        <div class="ss-full">
+          <img src="../ss/cases/st-architecture.png" alt="Service architecture" loading="lazy" onclick="openLb(this.src)"/>
+        </div>
+        <p class="ss-cap">Service architecture section — how Dasein's capabilities map to the problem</p>
+      </div>
+      <div>
+        <div class="ss-full">
+          <img src="../ss/cases/st-mobile.png" alt="Mobile view" loading="lazy" onclick="openLb(this.src)"/>
+        </div>
+        <p class="ss-cap">Mobile view — dot navigation · warm paper · fully responsive</p>
+      </div>
+    </div>
+
+    <div class="callout r" style="margin-top:1.5rem">
+      The report is the <strong>client-facing deliverable</strong>, not an internal tool. It needs to look like it cost $50K. That meant custom typography, editorial layout, locked sections for premium tiers, and a QC pipeline that scores every output before it goes out.
+    </div>
+  </div>
+
+  <!-- QC PIPELINE -->
+  <div class="block sdiv" id="qc">
+    <div class="block-label">04 — Quality Control Pipeline</div>
+    <h2 class="block-title r">From 2.5/5 to 4.72/5.</h2>
+    <div class="block-body r">
+      <p>The first 3 simulations scored 2.5/5. Hallucinated actors, broken accents, mismatched signal IDs, generic outputs. I built a <strong>4-service QC pipeline</strong> that runs automatically after every report:</p>
+      <ol style="margin:.75rem 0 .75rem 1.25rem;color:var(--muted);font-size:.92rem;line-height:1.9">
+        <li><strong style="color:var(--txt)">Preflight check</strong> — validates pipeline integrity (EventBridge present, paths exist, entities grounded)</li>
+        <li><strong style="color:var(--txt)">Rubric evaluation</strong> — 10-dimension 1–5 scale scoring (specificity, sourcing, actionability…)</li>
+        <li><strong style="color:var(--txt)">Auto-improvement</strong> — rewrites sections scoring below 4.0 with targeted prompts</li>
+        <li><strong style="color:var(--txt)">Audit trail</strong> — logs every score change, every rewrite, every flag</li>
+      </ol>
+    </div>
+
+    <div class="stat-row r">
+      <div class="stat-item"><div class="stat-n">2.5</div><div class="stat-l">Initial QC score</div></div>
+      <div class="stat-item"><div class="stat-n">4.72</div><div class="stat-l">Post-pipeline score (Mining)</div></div>
+      <div class="stat-item"><div class="stat-n">4.67</div><div class="stat-l">Energy Mexico</div></div>
+      <div class="stat-item"><div class="stat-n">4.70</div><div class="stat-l">Banking Chile</div></div>
+      <div class="stat-item"><div class="stat-n">10</div><div class="stat-l">QC dimensions scored</div></div>
+      <div class="stat-item"><div class="stat-n">4.5+</div><div class="stat-l">Commercial threshold</div></div>
+    </div>
+  </div>
+
+  <!-- TECH -->
+  <div class="block sdiv" id="tech">
+    <div class="block-label">05 — Architecture</div>
+    <h2 class="block-title r">How the pieces<br>fit together.</h2>
+
+    <div class="ss-placeholder r">
+      <div class="ss-placeholder-icon">📸</div>
+      <div class="ss-placeholder-text">Add Architecture Diagram Screenshot</div>
+      <div class="ss-placeholder-hint">Capture the dasein-ai-os.html or ai-os-flows-v2.html which shows the full SignalTwin architecture — the agent flow diagram</div>
+    </div>
+
+    <div class="ss-2col r" style="margin-top:2rem">
+      <div>
+        <p style="font-family:var(--fm);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin-bottom:.75rem">Frontend (Vue 3)</p>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:.5rem">
+          <li style="font-size:.88rem;color:var(--muted)">Vue 3 + Vite — SPA wizard UI</li>
+          <li style="font-size:.88rem;color:var(--muted)">D3.js — force layout engine</li>
+          <li style="font-size:.88rem;color:var(--muted)">Three.js — 3D rendering layer</li>
+          <li style="font-size:.88rem;color:var(--muted)">5-step wizard (Graph → Sim → Report)</li>
+          <li style="font-size:.88rem;color:var(--muted)">ToastContainer — live pipeline logs</li>
+        </ul>
+      </div>
+      <div>
+        <p style="font-family:var(--fm);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin-bottom:.75rem">Backend (Flask 3)</p>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:.5rem">
+          <li style="font-size:.88rem;color:var(--muted)">Flask 3 — REST API + WebSocket</li>
+          <li style="font-size:.88rem;color:var(--muted)">Neo4j — knowledge graph storage</li>
+          <li style="font-size:.88rem;color:var(--muted)">AWS Bedrock — Claude Sonnet calls</li>
+          <li style="font-size:.88rem;color:var(--muted)">local_graph_adapter — $0 graph infra</li>
+          <li style="font-size:.88rem;color:var(--muted)">Docker — full local stack</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="case-footer">
+  <span class="case-footer-l">SignalTwin — Pablo Moraga</span>
+  <div class="case-footer-r">
+    <a href="https://github.com/SalvatierraPM/SignalTwin" target="_blank" rel="noopener">GitHub</a>
+    <a href="../../../index.html#work">Back to work</a>
+    <a href="aios.html">Next: AI OS →</a>
+  </div>
+</div>
+
+<div class="lb" id="lb" onclick="closeLb()">
+  <div class="lb-close">✕</div>
+  <img id="lb-img" src="" alt=""/>
+</div>
+
+<script>
+const ro=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('on');ro.unobserve(x.target)}})},{threshold:.08});
+document.querySelectorAll('.r').forEach(el=>ro.observe(el));
+function openLb(src){document.getElementById('lb-img').src=src;document.getElementById('lb').classList.add('open');document.body.style.overflow='hidden'}
+function closeLb(){document.getElementById('lb').classList.remove('open');document.body.style.overflow=''}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLb()});
+</script>
+</body>
+</html>
