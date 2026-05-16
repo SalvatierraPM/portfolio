@@ -1,0 +1,1547 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Pablo Moraga — Designer & Builder</title>
+<meta name="description" content="I design and build things that work. Interfaces, AI systems, data pipelines."/>
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin/>
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,400&f[]=space-grotesk@400,500,600&f[]=azeret-mono@400&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg:     #0d0d11;
+  --bg2:    #111116;
+  --surf:   #18181f;
+  --bdr:    #252530;
+  --bdr2:   #32323f;
+  --txt:    #f0ede8;
+  --muted:  #6e6e80;
+  --dim:    #3e3e4e;
+  --acc:    #c4935a;
+  --acc2:   #d4a870;
+  --fd: 'Satoshi', system-ui, sans-serif;
+  --fb: 'Space Grotesk', system-ui, sans-serif;
+  --fm: 'Azeret Mono', monospace;
+  --ease: cubic-bezier(0.16,1,0.3,1);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--txt);
+  font-family: var(--fb);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+::selection { background: var(--acc); color: var(--bg); }
+::-webkit-scrollbar { width: 2px; }
+::-webkit-scrollbar-thumb { background: var(--bdr2); }
+
+/* grain */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: .018;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px;
+}
+
+/* ── REVEAL ── */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
+.reveal.in { opacity: 1; transform: none; }
+.reveal-left { opacity: 0; transform: translateX(-32px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
+.reveal-left.in { opacity: 1; transform: none; }
+.reveal-right { opacity: 0; transform: translateX(32px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
+.reveal-right.in { opacity: 1; transform: none; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; inset-inline: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.4rem 2.5rem;
+  transition: background .4s, backdrop-filter .4s;
+}
+nav.solid {
+  background: rgba(13,13,17,.92);
+  backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--bdr);
+}
+.nav-logo {
+  font-family: var(--fd); font-weight: 900; font-size: 1.1rem;
+  letter-spacing: -0.04em; color: var(--acc);
+}
+.nav-links { display: flex; align-items: center; gap: 2rem; font-size: .82rem; color: var(--muted); }
+.nav-links a { transition: color .15s; font-weight: 500; }
+.nav-links a:hover { color: var(--txt); }
+.nav-cta {
+  background: var(--acc) !important; color: var(--bg) !important;
+  padding: .4rem 1rem; border-radius: 6px; font-weight: 600;
+  font-size: .82rem; transition: background .15s !important;
+}
+.nav-cta:hover { background: var(--acc2) !important; }
+@media(max-width:640px) {
+  nav { padding: 1rem 1.25rem; }
+  .nav-links { gap: 1rem; }
+  .nav-links a:not(.nav-cta) { display: none; }
+}
+
+/* ── HERO ── */
+.hero {
+  min-height: 100svh;
+  display: flex; align-items: flex-end;
+  padding: 0 2.5rem 5rem;
+  position: relative;
+  overflow: hidden;
+}
+canvas#hero-c {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  opacity: .5;
+}
+.hero-inner {
+  position: relative; z-index: 2;
+  max-width: 1200px; width: 100%;
+}
+.hero-available {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-family: var(--fm); font-size: .62rem; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--muted);
+  margin-bottom: 2rem;
+}
+.hero-available-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: #22c55e; box-shadow: 0 0 8px #22c55e;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1}50%{opacity:.3} }
+
+.hero-name {
+  font-family: var(--fd); font-weight: 900;
+  font-size: clamp(4rem, 2rem + 8vw, 10rem);
+  letter-spacing: -0.045em; line-height: .9;
+  color: var(--txt);
+  margin-bottom: 2.5rem;
+}
+.hero-name span { color: var(--acc); }
+
+.hero-meta {
+  display: flex; align-items: center; gap: 3rem;
+  flex-wrap: wrap;
+}
+.hero-role {
+  font-family: var(--fm); font-size: .72rem;
+  letter-spacing: .1em; color: var(--muted);
+  text-transform: uppercase;
+}
+.hero-links { display: flex; gap: 1.5rem; }
+.hero-links a {
+  font-size: .85rem; color: var(--muted); font-weight: 500;
+  transition: color .15s;
+  display: flex; align-items: center; gap: .4rem;
+}
+.hero-links a:hover { color: var(--acc); }
+
+/* ── REEL strip ── */
+.reel-strip {
+  border-top: 1px solid var(--bdr);
+  border-bottom: 1px solid var(--bdr);
+  padding: 1.2rem 0;
+  overflow: hidden;
+  white-space: nowrap;
+  background: var(--bg2);
+}
+.reel-track {
+  display: inline-flex; gap: 4rem;
+  animation: scroll-reel 28s linear infinite;
+  font-family: var(--fm); font-size: .62rem; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--dim);
+}
+.reel-track span { color: var(--acc); }
+@keyframes scroll-reel {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ── SECTION HEADERS ── */
+.sec-label {
+  font-family: var(--fm); font-size: .6rem; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--acc);
+  display: flex; align-items: center; gap: .75rem;
+  margin-bottom: 3rem;
+}
+.sec-label::before {
+  content: ''; display: block;
+  width: 32px; height: 1px; background: var(--acc); opacity: .6;
+}
+
+/* ── INTRO ── */
+.intro-section {
+  padding: 8rem 2.5rem;
+  max-width: 1200px; margin: 0 auto;
+}
+.intro-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 6rem; align-items: start;
+}
+.intro-title {
+  font-family: var(--fd); font-weight: 900;
+  font-size: clamp(2.4rem, 1.5rem + 3vw, 4.5rem);
+  letter-spacing: -0.04em; line-height: 1.0;
+}
+.intro-title .acc { color: var(--acc); }
+.intro-body {
+  display: flex; flex-direction: column; gap: 1.25rem;
+  padding-top: .5rem;
+}
+.intro-body p { font-size: 1.05rem; color: var(--muted); line-height: 1.75; }
+.intro-body strong { color: var(--txt); font-weight: 600; }
+@media(max-width:768px) {
+  .intro-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+}
+
+/* ── PROJECT CASES ── */
+.cases { padding: 0 0 6rem; }
+
+.case {
+  padding: 6rem 2.5rem;
+  border-top: 1px solid var(--bdr);
+  max-width: 100%;
+  overflow: hidden;
+}
+.case-grid {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: start;
+}
+.case-meta { position: sticky; top: 8rem; }
+.case-num {
+  font-family: var(--fm); font-size: .58rem; letter-spacing: .2em;
+  color: var(--dim); margin-bottom: 1rem; text-transform: uppercase;
+}
+.case-title {
+  font-family: var(--fd); font-weight: 900;
+  font-size: clamp(1.8rem, 1.2rem + 2vw, 3rem);
+  letter-spacing: -0.035em; line-height: 1.05;
+  margin-bottom: 1rem;
+}
+.case-role {
+  font-family: var(--fm); font-size: .6rem; letter-spacing: .12em;
+  text-transform: uppercase;
+  padding: .25rem .6rem; border: 1px solid var(--bdr2);
+  border-radius: 4px; display: inline-block;
+  margin-bottom: 1.5rem; color: var(--muted);
+}
+.case-desc {
+  font-size: .92rem; color: var(--muted); line-height: 1.7;
+  margin-bottom: 2rem;
+}
+.case-stack {
+  display: flex; flex-wrap: wrap; gap: .35rem;
+  margin-bottom: 2rem;
+}
+.case-tag {
+  font-family: var(--fm); font-size: .55rem; letter-spacing: .06em;
+  padding: .2rem .5rem; border-radius: 3px;
+  border: 1px solid var(--bdr); color: var(--dim);
+  background: var(--surf);
+}
+.case-links { display: flex; flex-direction: column; gap: .6rem; }
+.case-link {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-family: var(--fm); font-size: .62rem; letter-spacing: .08em;
+  color: var(--muted); transition: color .15s;
+  text-transform: uppercase;
+}
+.case-link:hover { color: var(--acc); }
+.case-link svg { flex-shrink: 0; }
+
+/* browser mockup */
+.case-visual { display: flex; flex-direction: column; gap: 1.5rem; }
+
+.browser {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--bdr2);
+  background: #1a1a1f;
+  box-shadow: 0 32px 80px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.04);
+  transition: transform .4s var(--ease), box-shadow .4s;
+}
+.browser:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 48px 100px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.06);
+}
+.browser-bar {
+  height: 36px;
+  background: #1f1f27;
+  border-bottom: 1px solid var(--bdr);
+  display: flex; align-items: center;
+  padding: 0 1rem; gap: .5rem;
+  flex-shrink: 0;
+}
+.browser-dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  flex-shrink: 0;
+}
+.browser-dot:nth-child(1) { background: #ff5f57; }
+.browser-dot:nth-child(2) { background: #ffbd2e; }
+.browser-dot:nth-child(3) { background: #28ca41; }
+.browser-url {
+  flex: 1; max-width: 260px; margin: 0 auto;
+  height: 20px; background: var(--bdr); border-radius: 3px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--fm); font-size: .58rem; color: var(--dim); letter-spacing: .04em;
+  padding: 0 .75rem;
+}
+.browser-img { display: block; width: 100%; height: auto; }
+
+/* raw mockup (no browser bar, just elevated) */
+.raw-preview {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--bdr);
+  box-shadow: 0 20px 60px rgba(0,0,0,.4);
+  transition: transform .4s var(--ease);
+}
+.raw-preview:hover { transform: translateY(-3px); }
+.raw-preview img { width: 100%; height: auto; display: block; }
+
+/* screenshot grid */
+.ss-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.ss-grid-3 { display: grid; grid-template-columns: 2fr 1fr; gap: 1rem; }
+
+/* caption */
+.ss-cap {
+  font-family: var(--fm); font-size: .58rem; letter-spacing: .08em;
+  color: var(--dim); margin-top: .5rem; text-transform: uppercase;
+}
+
+@media(max-width:960px) {
+  .case-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .case-meta { position: static; }
+  .ss-grid-2, .ss-grid-3 { grid-template-columns: 1fr; }
+}
+@media(max-width:640px) {
+  .case { padding: 4rem 1.25rem; }
+}
+
+/* ── STACK ── */
+.stack-section {
+  padding: 6rem 2.5rem;
+  border-top: 1px solid var(--bdr);
+  max-width: 1200px; margin: 0 auto;
+}
+.stack-cols {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 0; margin-top: 3rem;
+}
+.stack-col {
+  padding: 2rem 2.5rem 2rem 0;
+  border-right: 1px solid var(--bdr);
+}
+.stack-col:last-child { border-right: none; padding-right: 0; padding-left: 2.5rem; }
+.stack-col:nth-child(2) { padding-left: 2.5rem; }
+.stack-col-name {
+  font-family: var(--fd); font-weight: 700; font-size: .9rem;
+  letter-spacing: -0.02em; color: var(--acc);
+  margin-bottom: 1.25rem;
+}
+.stack-items { list-style: none; display: flex; flex-direction: column; gap: .5rem; }
+.stack-items li {
+  font-size: .9rem; color: var(--muted);
+  display: flex; align-items: center; gap: .6rem;
+  transition: color .15s;
+}
+.stack-items li::before {
+  content: ''; width: 3px; height: 3px; border-radius: 50%;
+  background: var(--bdr2); flex-shrink: 0; transition: background .15s;
+}
+.stack-items li:hover { color: var(--txt); }
+.stack-items li:hover::before { background: var(--acc); }
+@media(max-width:768px) {
+  .stack-cols { grid-template-columns: 1fr; }
+  .stack-col, .stack-col:last-child, .stack-col:nth-child(2) {
+    padding: 1.5rem 0; border-right: none; border-bottom: 1px solid var(--bdr);
+  }
+  .stack-col:last-child { border-bottom: none; }
+}
+
+/* ── ABOUT ── */
+.about-section {
+  padding: 6rem 2.5rem;
+  border-top: 1px solid var(--bdr);
+  max-width: 1200px; margin: 0 auto;
+}
+.about-grid {
+  display: grid; grid-template-columns: 380px 1fr;
+  gap: 6rem; align-items: start;
+}
+.about-photo-wrap {
+  border-radius: 16px; overflow: hidden;
+  aspect-ratio: 4/5; position: relative;
+}
+.about-photo-wrap img {
+  width: 100%; height: 100%; object-fit: cover;
+  object-position: center top;
+  filter: saturate(.88) contrast(1.06);
+  transition: filter .6s;
+}
+.about-photo-wrap:hover img { filter: saturate(1.05) contrast(1.02); }
+.about-photo-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, transparent 60%, rgba(13,13,17,.55) 100%);
+}
+.about-name-badge {
+  position: absolute; bottom: 1.5rem; left: 1.5rem;
+  font-family: var(--fd); font-weight: 700;
+  font-size: .85rem; letter-spacing: -0.02em;
+  color: var(--txt);
+  display: flex; flex-direction: column; gap: .2rem;
+}
+.about-name-badge span { font-family: var(--fm); font-size: .6rem; letter-spacing: .1em; color: var(--acc); text-transform: uppercase; }
+.about-text { padding-top: .5rem; }
+.about-headline {
+  font-family: var(--fd); font-weight: 900;
+  font-size: clamp(2.2rem, 1.4rem + 2.5vw, 3.8rem);
+  letter-spacing: -0.04em; line-height: .98;
+  margin-bottom: 2rem;
+}
+.about-headline .acc { color: var(--acc); }
+.about-copy { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2.5rem; }
+.about-copy p { font-size: .97rem; color: var(--muted); line-height: 1.75; }
+.about-copy strong { color: var(--txt); font-weight: 600; }
+.about-copy .aside {
+  font-size: .85rem !important; color: var(--dim) !important;
+  font-style: italic; border-left: 2px solid var(--bdr2);
+  padding-left: .9rem;
+}
+.about-contact { display: flex; flex-direction: column; gap: .6rem; }
+.about-contact a {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-size: .88rem; color: var(--muted); transition: color .15s;
+}
+.about-contact a:hover { color: var(--acc); }
+.about-contact a svg { color: var(--dim); transition: color .15s; }
+.about-contact a:hover svg { color: var(--acc); }
+@media(max-width:900px) {
+  .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .about-photo-wrap { max-width: 320px; }
+}
+@media(max-width:640px) {
+  .about-section { padding: 4rem 1.25rem; }
+}
+
+/* ── CONTACT ── */
+.contact-section {
+  padding: 6rem 2.5rem 4rem;
+  border-top: 1px solid var(--bdr);
+  max-width: 1200px; margin: 0 auto;
+}
+.contact-headline {
+  font-family: var(--fd); font-weight: 900;
+  font-size: clamp(3.5rem, 2rem + 6vw, 9rem);
+  letter-spacing: -0.045em; line-height: .9;
+  margin-bottom: 2rem;
+}
+.contact-headline .dim { color: var(--muted); }
+.contact-headline .acc { color: var(--acc); }
+.contact-sub {
+  font-size: 1.05rem; color: var(--muted); max-width: 440px;
+  line-height: 1.6; margin-bottom: 2.5rem;
+}
+.contact-email {
+  display: inline-flex; align-items: center; gap: .8rem;
+  font-family: var(--fd); font-weight: 700;
+  font-size: clamp(1.1rem, .9rem + 1vw, 1.8rem);
+  letter-spacing: -0.03em; color: var(--txt);
+  border-bottom: 2px solid var(--acc); padding-bottom: .2rem;
+  transition: color .2s, gap .2s;
+}
+.contact-email:hover { color: var(--acc); gap: 1.2rem; }
+.contact-email:hover svg { transform: translateX(4px); }
+.contact-email svg { transition: transform .2s; }
+.footer-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  border-top: 1px solid var(--bdr); padding-top: 1.5rem;
+  margin-top: 5rem;
+}
+.footer-name { font-family: var(--fd); font-weight: 700; font-size: .85rem; color: var(--muted); letter-spacing: -0.02em; }
+.footer-copy { font-family: var(--fm); font-size: .6rem; color: var(--dim); }
+.footer-r { display: flex; gap: 2rem; font-size: .85rem; color: var(--dim); }
+.footer-r a { transition: color .15s; }
+.footer-r a:hover { color: var(--acc); }
+@media(max-width:640px) {
+  .contact-section { padding: 4rem 1.25rem 2rem; }
+  .footer-bar { flex-direction: column; align-items: flex-start; gap: 1rem; }
+}
+
+/* lang toggle */
+.lang-en .es, .lang-es .en { display: none; }
+
+/* ── CREATIVE LAB ── */
+.lab-section {
+  padding: 6rem 2.5rem;
+  border-top: 1px solid var(--bdr);
+  max-width: 1200px; margin: 0 auto;
+}
+.lab-header {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  margin-bottom: 3rem; gap: 2rem; flex-wrap: wrap;
+}
+.lab-title {
+  font-family: var(--fd); font-weight: 900;
+  font-size: clamp(2rem, 1.4rem + 2.5vw, 3.5rem);
+  letter-spacing: -0.04em; line-height: 1.0;
+}
+.lab-sub {
+  max-width: 420px;
+  font-size: .9rem; color: var(--muted); line-height: 1.6;
+}
+
+/* masonry-style bento */
+.lab-bento {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-auto-rows: 120px;
+  gap: .75rem;
+}
+.lab-item {
+  border-radius: 12px; overflow: hidden;
+  position: relative; cursor: pointer;
+  border: 1px solid var(--bdr);
+  background: var(--surf);
+  transition: transform .35s var(--ease), box-shadow .35s, border-color .35s;
+}
+.lab-item:hover {
+  transform: scale(1.02);
+  box-shadow: 0 20px 60px rgba(0,0,0,.5);
+  border-color: rgba(255,255,255,.12);
+  z-index: 2;
+}
+.lab-item img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .6s var(--ease);
+}
+.lab-item:hover img { transform: scale(1.05); }
+.lab-item-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(13,13,17,.9) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity .3s;
+  display: flex; flex-direction: column;
+  justify-content: flex-end; padding: 1rem 1.1rem;
+}
+.lab-item:hover .lab-item-overlay { opacity: 1; }
+.lab-item-title {
+  font-family: var(--fd); font-weight: 700;
+  font-size: .85rem; letter-spacing: -0.02em;
+  color: var(--txt); margin-bottom: .2rem;
+}
+.lab-item-tech {
+  font-family: var(--fm); font-size: .55rem;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: var(--acc);
+}
+
+/* grid placement */
+.lab-item--a { grid-column: span 4; grid-row: span 3; }
+.lab-item--b { grid-column: span 4; grid-row: span 3; }
+.lab-item--c { grid-column: span 4; grid-row: span 3; }
+.lab-item--d { grid-column: span 5; grid-row: span 2; }
+.lab-item--e { grid-column: span 4; grid-row: span 2; }
+.lab-item--f { grid-column: span 3; grid-row: span 2; }
+.lab-item--g { grid-column: span 6; grid-row: span 2; }
+.lab-item--h { grid-column: span 6; grid-row: span 2; }
+.lab-item--i { grid-column: span 3; grid-row: span 2; }
+.lab-item--j { grid-column: span 3; grid-row: span 2; }
+.lab-item--k { grid-column: span 6; grid-row: span 2; }
+.lab-item--l { grid-column: span 4; grid-row: span 2; }
+.lab-item--m { grid-column: span 8; grid-row: span 3; }
+.lab-item--n { grid-column: span 4; grid-row: span 3; }
+
+/* component catalog */
+.comp-catalog {
+  margin-top: 4rem;
+  border-top: 1px solid var(--bdr);
+  padding-top: 3rem;
+}
+.comp-catalog-title {
+  font-family: var(--fm); font-size: .6rem; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--dim);
+  margin-bottom: 2rem;
+}
+.comp-groups {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 2rem 3rem;
+}
+.comp-group-name {
+  font-family: var(--fd); font-weight: 700; font-size: .82rem;
+  letter-spacing: -0.02em; color: var(--acc);
+  margin-bottom: .75rem;
+  display: flex; align-items: center; gap: .5rem;
+}
+.comp-group-name::after {
+  content: ''; flex: 1; height: 1px; background: var(--bdr);
+}
+.comp-list {
+  list-style: none; display: flex; flex-direction: column; gap: .25rem;
+}
+.comp-list li {
+  font-family: var(--fm); font-size: .68rem; letter-spacing: .03em;
+  color: var(--muted); display: flex; align-items: baseline; gap: .4rem;
+  line-height: 1.6; transition: color .15s;
+}
+.comp-list li:hover { color: var(--txt); }
+.comp-list li::before {
+  content: attr(data-type);
+  font-size: .5rem; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--dim); flex-shrink: 0; padding: .05rem .3rem;
+  border: 1px solid var(--bdr); border-radius: 2px;
+  line-height: 1.6;
+}
+@media(max-width:900px) { .comp-groups { grid-template-columns: 1fr 1fr; } }
+@media(max-width:600px) { .comp-groups { grid-template-columns: 1fr; } }
+
+/* text-only lab card */
+.lab-item--text {
+  background: var(--surf);
+  display: flex; flex-direction: column;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+}
+.lab-item--text .lab-item-overlay { display: none; }
+.lab-text-label {
+  font-family: var(--fm); font-size: .58rem;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--dim);
+}
+.lab-text-stat {
+  font-family: var(--fd); font-weight: 900;
+  font-size: clamp(1.8rem, 1.2rem + 2vw, 3rem);
+  letter-spacing: -0.04em; color: var(--acc);
+  line-height: 1;
+}
+
+/* ── DEMO EMBEDS ── */
+.demo-embed-wrap {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--bdr2);
+  background: #111116;
+  display: flex; flex-direction: column;
+  box-shadow: 0 16px 48px rgba(0,0,0,.4);
+  transition: transform .35s var(--ease), box-shadow .35s, border-color .35s;
+}
+.demo-embed-wrap:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 28px 64px rgba(0,0,0,.55);
+  border-color: rgba(255,255,255,.1);
+}
+.demo-embed-bar {
+  height: 32px;
+  background: #1a1a22;
+  border-bottom: 1px solid var(--bdr);
+  display: flex; align-items: center;
+  padding: 0 .75rem; gap: .35rem;
+  flex-shrink: 0;
+}
+.demo-dot {
+  width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0;
+}
+.demo-dot:nth-child(1) { background: #ff5f57; }
+.demo-dot:nth-child(2) { background: #ffbd2e; }
+.demo-dot:nth-child(3) { background: #28ca41; }
+.demo-url {
+  flex: 1; font-family: var(--fm); font-size: .55rem;
+  letter-spacing: .05em; color: var(--dim);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  margin-left: .35rem;
+}
+.demo-open {
+  font-family: var(--fm); font-size: .65rem; color: var(--muted);
+  padding: .1rem .3rem; border-radius: 3px;
+  border: 1px solid var(--bdr); transition: all .15s;
+  flex-shrink: 0;
+}
+.demo-open:hover { color: var(--acc); border-color: var(--acc); }
+.demo-iframe {
+  width: 100%; height: 260px;
+  border: none; display: block;
+  background: #000;
+  pointer-events: none; /* prevent scroll hijack, click ↗ to open */
+}
+.demo-embed-wrap:hover .demo-iframe { pointer-events: all; }
+.demo-caption {
+  font-family: var(--fm); font-size: .55rem; letter-spacing: .07em;
+  color: var(--dim); padding: .5rem .75rem;
+  border-top: 1px solid var(--bdr);
+  text-transform: uppercase;
+}
+@media(max-width:900px) {
+  .demos-row { grid-template-columns: 1fr !important; }
+}
+@media(max-width:640px) {
+  .demos-row { grid-template-columns: 1fr !important; }
+  .demo-iframe { height: 200px; }
+}
+.lab-text-desc {
+  font-size: .75rem; color: var(--muted); line-height: 1.4;
+}
+
+@media(max-width:900px) {
+  .lab-bento {
+    grid-template-columns: repeat(6, 1fr);
+    grid-auto-rows: 100px;
+  }
+  .lab-item--a, .lab-item--b, .lab-item--c { grid-column: span 3; grid-row: span 2; }
+  .lab-item--d, .lab-item--e, .lab-item--f { grid-column: span 3; grid-row: span 2; }
+  .lab-item--g, .lab-item--h { grid-column: span 6; grid-row: span 2; }
+}
+@media(max-width:600px) {
+  .lab-section { padding: 4rem 1.25rem; }
+  .lab-bento { grid-template-columns: 1fr 1fr; grid-auto-rows: 160px; }
+  .lab-item--a, .lab-item--b, .lab-item--c,
+  .lab-item--d, .lab-item--e, .lab-item--f,
+  .lab-item--g, .lab-item--h { grid-column: span 1; grid-row: span 1; }
+}
+
+/* reduced motion */
+@media(prefers-reduced-motion:reduce) {
+  .reveal, .reveal-left, .reveal-right { opacity: 1; transform: none; transition: none; }
+  canvas#hero-c { display: none; }
+  .reel-track { animation-play-state: paused; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="nav-logo" href="#">PM</a>
+  <div class="nav-links">
+    <a href="#work">Work</a>
+    <a href="#stack">Stack</a>
+    <a href="#about">About</a>
+    <button onclick="toggleLang()" id="lang-btn" style="font-family:var(--fm);font-size:.6rem;letter-spacing:.1em;border:1px solid var(--bdr2);padding:.2rem .55rem;border-radius:4px;color:var(--muted);cursor:pointer;background:none;transition:all .15s" onmouseover="this.style.borderColor='var(--acc)';this.style.color='var(--acc)'" onmouseout="this.style.borderColor='var(--bdr2)';this.style.color='var(--muted)'">ES</button>
+    <a class="nav-cta" href="mailto:pablo@daseinfs.com">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <canvas id="hero-c" aria-hidden="true"></canvas>
+  <div class="hero-inner">
+    <div class="hero-available reveal">
+      <div class="hero-available-dot"></div>
+      <span class="en">Available for projects</span>
+      <span class="es">Disponible para proyectos</span>
+    </div>
+    <h1 class="hero-name reveal">
+      Pablo<br>
+      Mo<span>raga</span>
+    </h1>
+    <div class="hero-meta reveal">
+      <div class="hero-role en">Designer &amp; Builder · Santiago, Chile</div>
+      <div class="hero-role es">Diseñador &amp; Constructor · Santiago, Chile</div>
+      <div class="hero-links">
+        <a href="#work">
+          <span class="en">Work ↓</span>
+          <span class="es">Trabajo ↓</span>
+        </a>
+        <a href="https://github.com/SalvatierraPM" target="_blank" rel="noopener">GitHub ↗</a>
+        <a href="mailto:pablo@daseinfs.com">Email ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REEL STRIP -->
+<div class="reel-strip">
+  <div class="reel-track">
+    <span>Astro</span> <span style="color:var(--acc)">※</span>
+    <span>Three.js</span> <span style="color:var(--acc)">※</span>
+    <span>WebGL2 / GLSL</span> <span style="color:var(--acc)">※</span>
+    <span>Vue 3</span> <span style="color:var(--acc)">※</span>
+    <span>React</span> <span style="color:var(--acc)">※</span>
+    <span>Framer Motion</span> <span style="color:var(--acc)">※</span>
+    <span>Flask + Python</span> <span style="color:var(--acc)">※</span>
+    <span>Neo4j</span> <span style="color:var(--acc)">※</span>
+    <span>Supabase</span> <span style="color:var(--acc)">※</span>
+    <span>AWS Bedrock</span> <span style="color:var(--acc)">※</span>
+    <span>Claude / Anthropic</span> <span style="color:var(--acc)">※</span>
+    <span>MCP Protocol</span> <span style="color:var(--acc)">※</span>
+    <span>D3.js</span> <span style="color:var(--acc)">※</span>
+    <span>Lenis</span> <span style="color:var(--acc)">※</span>
+    <!-- repeat for infinite illusion -->
+    <span>Astro</span> <span style="color:var(--acc)">※</span>
+    <span>Three.js</span> <span style="color:var(--acc)">※</span>
+    <span>WebGL2 / GLSL</span> <span style="color:var(--acc)">※</span>
+    <span>Vue 3</span> <span style="color:var(--acc)">※</span>
+    <span>React</span> <span style="color:var(--acc)">※</span>
+    <span>Framer Motion</span> <span style="color:var(--acc)">※</span>
+    <span>Flask + Python</span> <span style="color:var(--acc)">※</span>
+    <span>Neo4j</span> <span style="color:var(--acc)">※</span>
+    <span>Supabase</span> <span style="color:var(--acc)">※</span>
+    <span>AWS Bedrock</span> <span style="color:var(--acc)">※</span>
+    <span>Claude / Anthropic</span> <span style="color:var(--acc)">※</span>
+    <span>MCP Protocol</span> <span style="color:var(--acc)">※</span>
+    <span>D3.js</span> <span style="color:var(--acc)">※</span>
+    <span>Lenis</span> <span style="color:var(--acc)">※</span>
+  </div>
+</div>
+
+<!-- INTRO -->
+<div class="intro-section" id="work">
+  <div class="intro-grid">
+    <h2 class="intro-title reveal-left">
+      <span class="en">I build the things I design.</span>
+      <span class="es">Construyo lo que diseño.</span>
+    </h2>
+    <div class="intro-body reveal-right">
+      <p class="en">Product manager turned full-stack builder. I move across the entire stack — from pixel to pipeline, from WebGL shader to multi-agent AI system. Every project here is something I built myself, usually with Claude Code.</p>
+      <p class="es">Product manager convertido en builder full-stack. Me muevo por todo el stack — desde pixel hasta pipeline, desde shader WebGL hasta sistema multiagente. Cada proyecto acá lo construí yo, generalmente con Claude Code.</p>
+      <p class="en">I co-found <strong>Dasein Foresight</strong>, a strategic foresight consultancy. I build all of its technology: the landing, the CRM, the AI simulation engine, the reporting layer, and the agent OS that runs it all.</p>
+      <p class="es">Co-fundé <strong>Dasein Foresight</strong>, una consultora de prospectiva estratégica. Construyo toda su tecnología: la landing, el CRM, el motor de simulación IA, la capa de reportes y el OS de agentes que lo corre todo.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ CASE 01 — DASEIN LANDING ════════ -->
+<div class="cases">
+<section class="case">
+  <div class="case-grid">
+    <div class="case-meta reveal-left">
+      <div class="case-num">01 / Frontend · Live</div>
+      <h3 class="case-title">Dasein Foresight<br>Landing Page</h3>
+      <span class="case-role">daseinfs.com</span>
+      <p class="case-desc en">Corporate landing for a strategic foresight consultancy. Editorial typography at 7–9rem, Satoshi 900. Warm paper light mode, WebGL particle field, Lenis smooth scroll, Framer Motion scroll-triggered reveals, 3D entangled scene. Designed to feel like a premium consulting firm, not a SaaS product.</p>
+      <p class="case-desc es">Landing corporativa para consultora de prospectiva estratégica. Tipografía editorial a 7–9rem, Satoshi 900. Modo warm paper, campo de partículas WebGL, scroll suave Lenis, reveals scroll-triggered Framer Motion, escena 3D entrelazada. Diseñada para sentirse como una firma consultora premium.</p>
+      <div class="case-stack">
+        <span class="case-tag">Astro 6</span><span class="case-tag">Three.js</span><span class="case-tag">Framer Motion</span><span class="case-tag">Lenis</span><span class="case-tag">GSAP</span><span class="case-tag">TypeScript</span><span class="case-tag">CSS Custom Properties</span>
+      </div>
+      <div class="case-links">
+        <a href="https://www.daseinfs.com" target="_blank" rel="noopener" class="case-link">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          <span class="en">Live site</span><span class="es">Ver sitio</span>
+        </a>
+        <a href="https://github.com/SalvatierraPM/dasein-landing" target="_blank" rel="noopener" class="case-link">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+    <div class="case-visual reveal-right">
+      <div class="browser">
+        <div class="browser-bar">
+          <div class="browser-dot"></div><div class="browser-dot"></div><div class="browser-dot"></div>
+          <div class="browser-url">daseinfs.com</div>
+        </div>
+        <img class="browser-img" src="public/ss/live/dasein-hero.jpeg" alt="Dasein Foresight landing — hero section" loading="lazy"/>
+      </div>
+      <p class="ss-cap en">Hero — "Mejores decisiones impacto real EN CONDICIONES DE incertidumbre." Satoshi 900 at ~9rem.</p>
+      <p class="ss-cap es">Hero — Tipografía Satoshi 900 a ~9rem. Scroll-driven reveal.</p>
+
+      <div class="ss-grid-2" style="margin-top:1.5rem">
+        <div class="raw-preview reveal">
+          <img src="public/ss/live/dasein-s2.jpeg" alt="Dasein — capabilities section" loading="lazy"/>
+          <p class="ss-cap en" style="padding:.5rem .75rem">Pills marquee · "Tres procesos integrados"</p>
+          <p class="ss-cap es" style="padding:.5rem .75rem">Marquee de pills · sección procesos</p>
+        </div>
+        <div class="raw-preview reveal" style="transition-delay:.1s">
+          <img src="public/ss/live/dasein-s4.jpeg" alt="Dasein — 9 capacidades grid" loading="lazy"/>
+          <p class="ss-cap en" style="padding:.5rem .75rem">9-capability grid — editorial layout</p>
+          <p class="ss-cap es" style="padding:.5rem .75rem">Grilla de 9 capacidades — diseño editorial</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ CASE 02 — SIGNALTWIN ════════ -->
+<section class="case">
+  <div class="case-grid">
+    <div class="case-meta reveal-left">
+      <div class="case-num">02 / Full-Stack · AI · Data Engineering</div>
+      <h3 class="case-title">SignalTwin<br>Simulation Engine</h3>
+      <span class="case-role">Multi-agent platform</span>
+      <p class="case-desc en">End-to-end strategic simulation platform. A research agent scans signals, builds a Neo4j knowledge graph, generates an ontology, then runs a multi-agent simulation where AI actors play real roles — regulators, executives, lobbyists. Vue 3 + D3 frontend shows the 3D graph and simulation in real time. The output: 18-section editorial foresight reports.</p>
+      <p class="case-desc es">Plataforma de simulación estratégica end-to-end. Un agente de investigación escanea señales, construye un grafo de conocimiento Neo4j, genera una ontología y corre una simulación multiagente donde actores IA juegan roles reales. El frontend Vue 3 + D3 muestra el grafo 3D y la simulación. Output: reportes editoriales de 18 secciones.</p>
+      <div class="case-stack">
+        <span class="case-tag">Vue 3</span><span class="case-tag">D3.js</span><span class="case-tag">Flask 3</span><span class="case-tag">Python 3.11</span><span class="case-tag">Neo4j</span><span class="case-tag">AWS Bedrock</span><span class="case-tag">Claude Sonnet</span><span class="case-tag">Docker</span>
+      </div>
+      <div class="case-links">
+        <a href="https://github.com/SalvatierraPM/SignalTwin" target="_blank" rel="noopener" class="case-link">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+    <div class="case-visual reveal-right">
+      <div class="browser">
+        <div class="browser-bar">
+          <div class="browser-dot"></div><div class="browser-dot"></div><div class="browser-dot"></div>
+          <div class="browser-url">localhost:3000 — SignalTwin</div>
+        </div>
+        <img class="browser-img" src="public/ss/signaltwin-graph.png" alt="SignalTwin 3D knowledge graph" loading="lazy"/>
+      </div>
+      <p class="ss-cap en">3D force-directed knowledge graph — Vue 3 + D3 + Three.js. Nodes = actors, entities, regulations.</p>
+      <p class="ss-cap es">Grafo de conocimiento 3D — Vue 3 + D3 + Three.js. Nodos = actores, entidades, regulaciones.</p>
+
+      <div class="ss-grid-3" style="margin-top:1.5rem">
+        <div class="raw-preview reveal">
+          <img src="public/ss/report-cover.png" alt="SignalTwin simulation report — Banca Chilena" loading="lazy"/>
+          <p class="ss-cap" style="padding:.5rem .75rem en">Simulation report — Banca Chilena. Astro static delivery.</p>
+          <p class="ss-cap" style="padding:.5rem .75rem es">Reporte de simulación — Banca Chilena.</p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:1rem">
+          <div class="raw-preview reveal" style="transition-delay:.1s">
+            <img src="public/ss/report-summary.png" alt="En 2 minutos executive summary" loading="lazy"/>
+            <p class="ss-cap" style="padding:.4rem .6rem">"En 2 minutos" — Instrument Serif editorial</p>
+          </div>
+          <div class="raw-preview reveal" style="transition-delay:.2s">
+            <img src="public/ss/report-radar.png" alt="Radar de Señales" loading="lazy"/>
+            <p class="ss-cap" style="padding:.4rem .6rem">Radar de Señales — 21 curated signals</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ CASE 03 — CRM ════════ -->
+<section class="case">
+  <div class="case-grid">
+    <div class="case-meta reveal-left">
+      <div class="case-num">03 / Full-Stack · AI-Native</div>
+      <h3 class="case-title">Dasein CRM<br>AI-Native</h3>
+      <span class="case-role">Internal tool · Vercel</span>
+      <p class="case-desc en">A CRM built entirely with Claude Code. The standout feature: an interactive 3D force-directed relationship graph that maps contacts, organizations, deals, and signals in real space. Integrated Claude Sonnet streaming chat to query the database in natural language. Full auth, pipeline, meeting tracker, interaction history.</p>
+      <p class="case-desc es">CRM construido íntegramente con Claude Code. Feature diferenciador: grafo 3D de fuerza interactivo que mapea contactos, organizaciones, deals y señales en espacio real. Chat streaming con Claude Sonnet para consultar la base de datos en lenguaje natural. Auth completo, pipeline, tracker de reuniones e historial.</p>
+      <div class="case-stack">
+        <span class="case-tag">Astro</span><span class="case-tag">Vue.js</span><span class="case-tag">Supabase</span><span class="case-tag">3D Force Graph</span><span class="case-tag">Three.js</span><span class="case-tag">Anthropic SDK</span><span class="case-tag">TypeScript</span>
+      </div>
+      <div class="case-links">
+        <a href="https://github.com/SalvatierraPM/dasein-crm" target="_blank" rel="noopener" class="case-link">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+    <div class="case-visual reveal-right">
+      <div class="browser">
+        <div class="browser-bar">
+          <div class="browser-dot"></div><div class="browser-dot"></div><div class="browser-dot"></div>
+          <div class="browser-url">dasein-dashboard.netlify.app</div>
+        </div>
+        <img class="browser-img" src="public/ss/market-dashboard.png" alt="Dasein CRM — market entry intelligence module" loading="lazy"/>
+      </div>
+      <p class="ss-cap en">Market intelligence module — data-dense decision dashboard inside the CRM.</p>
+      <p class="ss-cap es">Módulo de inteligencia de mercado — dashboard denso de datos dentro del CRM.</p>
+      <div style="margin-top:1.5rem">
+        <div class="raw-preview reveal">
+          <img src="public/ss/market-research.png" alt="CRM research mode" loading="lazy"/>
+          <p class="ss-cap" style="padding:.5rem .75rem en">Research mode — competitor matrix, priority ranking, signals</p>
+          <p class="ss-cap" style="padding:.5rem .75rem es">Modo research — matriz competidores, ranking, señales</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ CASE 04 — MARKET RESEARCH REPORT ════════ -->
+<section class="case">
+  <div class="case-grid">
+    <div class="case-meta reveal-left">
+      <div class="case-num">04 / Data Engineering · Research</div>
+      <h3 class="case-title">Market Research<br>Report</h3>
+      <span class="case-role">Astro · Multi-Agent · Internal</span>
+      <p class="case-desc en">5 AI research agents running in parallel to produce a full market intelligence report: competitive positioning, buyer profile, signal pipeline, gap analysis, Banco Chile case study. Delivered as an Astro static site with editorial design — Satoshi display + Instrument Serif editorial italic. Internal document, screenshots only.</p>
+      <p class="case-desc es">5 agentes IA corriendo en paralelo para producir un reporte completo de inteligencia de mercado: posicionamiento, buyer profile, pipeline de señales, análisis de gaps, caso Banco Chile. Entregado como sitio estático Astro con diseño editorial. Documento interno, solo screenshots.</p>
+      <div class="case-stack">
+        <span class="case-tag">Astro</span><span class="case-tag">Python</span><span class="case-tag">Claude Code</span><span class="case-tag">Multi-Agent</span><span class="case-tag">Satoshi + Instrument Serif</span>
+      </div>
+    </div>
+    <div class="case-visual reveal-right">
+      <div class="ss-grid-2">
+        <div class="raw-preview">
+          <img src="public/ss/research-1.jpeg" alt="Market Research — hero" loading="lazy"/>
+          <p class="ss-cap" style="padding:.5rem .75rem">Hero — INTELIGENCIA INTERNA · NO DISTRIBUIR · MAYO 2026</p>
+        </div>
+        <div class="raw-preview reveal" style="transition-delay:.1s">
+          <img src="public/ss/research-2.jpeg" alt="Market Research — positioning" loading="lazy"/>
+          <p class="ss-cap" style="padding:.5rem .75rem">Positioning manifesto — "Market Research"</p>
+        </div>
+        <div class="raw-preview reveal" style="transition-delay:.15s">
+          <img src="public/ss/research-3.jpeg" alt="Market Research — competitive" loading="lazy"/>
+          <p class="ss-cap" style="padding:.5rem .75rem">Competitive landscape + priority matrix</p>
+        </div>
+        <div class="raw-preview reveal" style="transition-delay:.2s">
+          <img src="public/ss/research-4.jpeg" alt="Market Research — buyer profile" loading="lazy"/>
+          <p class="ss-cap" style="padding:.5rem .75rem">Buyer profile — Banco Chile case</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ CASE 05 — AI OS ════════ -->
+<section class="case" style="background:linear-gradient(to bottom,var(--bg) 0%,var(--bg2) 100%)">
+  <div class="case-grid" style="max-width:1200px;margin:0 auto">
+    <div class="case-meta reveal-left">
+      <div class="case-num">05 / AI Infrastructure · Systems</div>
+      <h3 class="case-title">Dasein<br>AI Operating System</h3>
+      <span class="case-role">Local · $0 cloud agent cost</span>
+      <p class="case-desc en">The entire automation backbone of Dasein Foresight. 15+ specialized Claude agents, 10 MCP servers (Slack, Linear, Obsidian, GitHub, Supabase, Playwright), 55 reusable skills, custom hook system, persistent cross-session memory, and 10 cron pipelines. Coordinates CRM updates, simulation runs, content creation, finance tracking, and ops — all running locally.</p>
+      <p class="case-desc es">El backbone de automatización completo de Dasein Foresight. 15+ agentes Claude especializados, 10 servidores MCP, 55 skills reutilizables, sistema de hooks personalizado, memoria persistente entre sesiones y 10 pipelines cron. Coordina updates de CRM, runs de simulación, contenido, finanzas y ops — todo local.</p>
+      <div class="case-stack">
+        <span class="case-tag">Claude Code</span><span class="case-tag">MCP Protocol</span><span class="case-tag">Python</span><span class="case-tag">Bash</span><span class="case-tag">Crontab</span><span class="case-tag">Node.js</span>
+      </div>
+      <div class="case-links">
+        <a href="https://github.com/SalvatierraPM/dasein-os" target="_blank" rel="noopener" class="case-link">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+    <div class="case-visual reveal-right">
+      <!-- Terminal-style stat display instead of screenshot -->
+      <div style="background:var(--surf);border:1px solid var(--bdr2);border-radius:12px;padding:2rem;font-family:var(--fm);font-size:.78rem;line-height:1.8">
+        <div style="color:var(--dim);margin-bottom:1.5rem;font-size:.62rem;letter-spacing:.1em">SYSTEM STATUS — DASEIN AI OS</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem">
+          <div>
+            <div style="color:var(--dim);font-size:.58rem;letter-spacing:.1em;margin-bottom:.5rem">AGENTS</div>
+            <div style="color:var(--acc);font-size:2.5rem;font-family:var(--fd);font-weight:900;letter-spacing:-0.04em;line-height:1">15+</div>
+            <div style="color:var(--muted);font-size:.75rem;margin-top:.25rem">specialized Claude agents</div>
+          </div>
+          <div>
+            <div style="color:var(--dim);font-size:.58rem;letter-spacing:.1em;margin-bottom:.5rem">MCP SERVERS</div>
+            <div style="color:var(--acc);font-size:2.5rem;font-family:var(--fd);font-weight:900;letter-spacing:-0.04em;line-height:1">10</div>
+            <div style="color:var(--muted);font-size:.75rem;margin-top:.25rem">Slack, Linear, Obsidian, GitHub…</div>
+          </div>
+          <div>
+            <div style="color:var(--dim);font-size:.58rem;letter-spacing:.1em;margin-bottom:.5rem">SKILLS</div>
+            <div style="color:var(--acc);font-size:2.5rem;font-family:var(--fd);font-weight:900;letter-spacing:-0.04em;line-height:1">55</div>
+            <div style="color:var(--muted);font-size:.75rem;margin-top:.25rem">reusable agent modules</div>
+          </div>
+          <div>
+            <div style="color:var(--dim);font-size:.58rem;letter-spacing:.1em;margin-bottom:.5rem">MEMORY DRAWERS</div>
+            <div style="color:var(--acc);font-size:2.5rem;font-family:var(--fd);font-weight:900;letter-spacing:-0.04em;line-height:1">7,960</div>
+            <div style="color:var(--muted);font-size:.75rem;margin-top:.25rem">MemPalace + Claude memory</div>
+          </div>
+          <div>
+            <div style="color:var(--dim);font-size:.58rem;letter-spacing:.1em;margin-bottom:.5rem">CRON PIPELINES</div>
+            <div style="color:var(--acc);font-size:2.5rem;font-family:var(--fd);font-weight:900;letter-spacing:-0.04em;line-height:1">10</div>
+            <div style="color:var(--muted);font-size:.75rem;margin-top:.25rem">autonomous, crontab-scheduled</div>
+          </div>
+          <div>
+            <div style="color:var(--dim);font-size:.58rem;letter-spacing:.1em;margin-bottom:.5rem">INFRA COST</div>
+            <div style="color:#22c55e;font-size:2.5rem;font-family:var(--fd);font-weight:900;letter-spacing:-0.04em;line-height:1">$0</div>
+            <div style="color:var(--muted);font-size:.75rem;margin-top:.25rem">fully local agent execution</div>
+          </div>
+        </div>
+        <div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--bdr)">
+          <div style="color:var(--dim);font-size:.58rem;letter-spacing:.1em;margin-bottom:.75rem">WHAT IT RUNS</div>
+          <div style="display:flex;flex-wrap:wrap;gap:.4rem">
+            <span style="padding:.2rem .6rem;border:1px solid var(--bdr);border-radius:3px;font-size:.58rem;color:var(--muted)">CRM updates</span>
+            <span style="padding:.2rem .6rem;border:1px solid var(--bdr);border-radius:3px;font-size:.58rem;color:var(--muted)">Simulation pipelines</span>
+            <span style="padding:.2rem .6rem;border:1px solid var(--bdr);border-radius:3px;font-size:.58rem;color:var(--muted)">Finance tracking</span>
+            <span style="padding:.2rem .6rem;border:1px solid var(--bdr);border-radius:3px;font-size:.58rem;color:var(--muted)">Content creation</span>
+            <span style="padding:.2rem .6rem;border:1px solid var(--bdr);border-radius:3px;font-size:.58rem;color:var(--muted)">Vault sync</span>
+            <span style="padding:.2rem .6rem;border:1px solid var(--bdr);border-radius:3px;font-size:.58rem;color:var(--muted)">Signal monitoring</span>
+            <span style="padding:.2rem .6rem;border:1px solid var(--bdr);border-radius:3px;font-size:.58rem;color:var(--muted)">Linear issues</span>
+            <span style="padding:.2rem .6rem;border:1px solid var(--bdr);border-radius:3px;font-size:.58rem;color:var(--muted)">Slack routing</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div><!-- /cases -->
+
+<!-- CREATIVE LAB -->
+<section id="lab">
+<div class="lab-section">
+  <div class="lab-header reveal">
+    <div>
+      <div class="sec-label" style="margin-bottom:.75rem">
+        <span class="en">Creative Lab &amp; UI Components</span>
+        <span class="es">Laboratorio Creativo &amp; Componentes</span>
+      </div>
+      <h2 class="lab-title en">Built for fun.<br>Kept for work.</h2>
+      <h2 class="lab-title es">Construido por diversión.<br>Mantenido para trabajar.</h2>
+    </div>
+    <p class="lab-sub en">WebGL2 particle systems, generative art experiments, UI component library from real production projects. Some of these are demos — click to open live.</p>
+    <p class="lab-sub es">Sistemas de partículas WebGL2, experimentos de arte generativo, biblioteca de componentes de producción real. Algunos son demos — haz click para abrir en vivo.</p>
+  </div>
+
+  <!-- LIVE DEMO EMBEDS — row of iframes -->
+  <div class="demos-row reveal" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.5rem">
+
+    <div class="demo-embed-wrap">
+      <div class="demo-embed-bar">
+        <span class="demo-dot"></span><span class="demo-dot"></span><span class="demo-dot"></span>
+        <span class="demo-url en">Entangled — spring-mass particles</span>
+        <span class="demo-url es">Entangled — partículas masa-resorte</span>
+        <a href="public/demos/entangled.html" target="_blank" class="demo-open">↗</a>
+      </div>
+      <iframe src="public/demos/entangled.html" class="demo-iframe" loading="lazy" title="Entangled WebGL2 particle system" sandbox="allow-scripts allow-same-origin"></iframe>
+      <div class="demo-caption">12K particles · WebGL2 · GLSL · curl noise · spring-mass</div>
+    </div>
+
+    <div class="demo-embed-wrap">
+      <div class="demo-embed-bar">
+        <span class="demo-dot"></span><span class="demo-dot"></span><span class="demo-dot"></span>
+        <span class="demo-url en">GPU Particles — 1M simulation</span>
+        <span class="demo-url es">GPU Particles — simulación 1M</span>
+        <a href="public/demos/gpuparticles.html" target="_blank" class="demo-open">↗</a>
+      </div>
+      <iframe src="public/demos/gpuparticles.html" class="demo-iframe" loading="lazy" title="GPU Particles 1 million" sandbox="allow-scripts allow-same-origin"></iframe>
+      <div class="demo-caption">1M particles · Three.js · GPUComputationRenderer · GLSL</div>
+    </div>
+
+    <div class="demo-embed-wrap">
+      <div class="demo-embed-bar">
+        <span class="demo-dot"></span><span class="demo-dot"></span><span class="demo-dot"></span>
+        <span class="demo-url en">24 CSS Loading Animations</span>
+        <span class="demo-url es">24 Animaciones de Carga CSS</span>
+        <a href="public/demos/loading-animations.html" target="_blank" class="demo-open">↗</a>
+      </div>
+      <iframe src="public/demos/loading-animations.html" class="demo-iframe" loading="lazy" title="24 CSS loading animations" sandbox="allow-scripts allow-same-origin"></iframe>
+      <div class="demo-caption">24 patterns · CSS + SVG · zero JS · global controls</div>
+    </div>
+
+  </div>
+
+  <!-- SECOND ROW of demos -->
+  <div class="demos-row reveal" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-bottom:2rem">
+
+    <div class="demo-embed-wrap">
+      <div class="demo-embed-bar">
+        <span class="demo-dot"></span><span class="demo-dot"></span><span class="demo-dot"></span>
+        <span class="demo-url">Entangled — Bubble</span>
+        <a href="public/demos/entangled-bubble.html" target="_blank" class="demo-open">↗</a>
+      </div>
+      <iframe src="public/demos/entangled-bubble.html" class="demo-iframe" loading="lazy" title="Entangled bubble" sandbox="allow-scripts allow-same-origin"></iframe>
+      <div class="demo-caption">Abstract bubble distribution · WebGL2</div>
+    </div>
+
+    <div class="demo-embed-wrap">
+      <div class="demo-embed-bar">
+        <span class="demo-dot"></span><span class="demo-dot"></span><span class="demo-dot"></span>
+        <span class="demo-url">Entangled — Text</span>
+        <a href="public/demos/entangled-text.html" target="_blank" class="demo-open">↗</a>
+      </div>
+      <iframe src="public/demos/entangled-text.html" class="demo-iframe" loading="lazy" title="Entangled text" sandbox="allow-scripts allow-same-origin"></iframe>
+      <div class="demo-caption">Particle letterforms · MAWHI · WebGL2</div>
+    </div>
+
+    <div class="demo-embed-wrap">
+      <div class="demo-embed-bar">
+        <span class="demo-dot"></span><span class="demo-dot"></span><span class="demo-dot"></span>
+        <span class="demo-url">3D Image Scroll Reveal</span>
+        <a href="public/demos/3d-scroll.html" target="_blank" class="demo-open">↗</a>
+      </div>
+      <iframe src="public/demos/3d-scroll.html" class="demo-iframe" loading="lazy" title="3D scroll reveal" sandbox="allow-scripts allow-same-origin"></iframe>
+      <div class="demo-caption">CSS 3D transforms · scroll-driven · perspective</div>
+    </div>
+
+  </div>
+
+  <!-- SCREENSHOT BENTO for things without live demos -->
+  <div class="lab-bento">
+
+    <div class="lab-item lab-item--a reveal">
+      <img src="public/ss/live/katalina.jpeg" alt="Katalina Schwarz DJ landing" loading="lazy"/>
+      <div class="lab-item-overlay">
+        <div class="lab-item-title">Katalina Schwarz — DJ Landing</div>
+        <div class="lab-item-tech">Vanilla JS · Dark UI · Admin CMS · Convex · Booking</div>
+      </div>
+    </div>
+
+    <div class="lab-item lab-item--b reveal" style="transition-delay:.07s">
+      <img src="public/ss/live/signal-cards.jpeg" alt="Dasein Signal Cards" loading="lazy"/>
+      <div class="lab-item-overlay">
+        <div class="lab-item-title">Signal Cards Design System</div>
+        <div class="lab-item-tech">Astro · CSS · Brand identity · 6 variants</div>
+      </div>
+    </div>
+
+    <div class="lab-item lab-item--c reveal" style="transition-delay:.14s">
+      <img src="public/ss/live/deck.jpeg" alt="Dasein Commercial Deck" loading="lazy"/>
+      <div class="lab-item-overlay">
+        <div class="lab-item-title">Dasein Commercial Deck</div>
+        <div class="lab-item-tech">HTML · CSS · Keyboard nav · Fullscreen · Print</div>
+      </div>
+    </div>
+
+    <div class="lab-item lab-item--d reveal" style="transition-delay:.1s">
+      <img src="public/ss/live/aios-diagram.jpeg" alt="Dasein AI OS Architecture" loading="lazy"/>
+      <div class="lab-item-overlay">
+        <div class="lab-item-title">AI OS Architecture Diagram</div>
+        <div class="lab-item-tech">HTML · SVG · Flow diagram · Custom layout</div>
+      </div>
+    </div>
+
+    <div class="lab-item lab-item--e reveal" style="transition-delay:.17s">
+      <img src="public/ss/live/gabriela.jpeg" alt="Gabriela Ulloa landing" loading="lazy"/>
+      <div class="lab-item-overlay">
+        <div class="lab-item-title">Gabriela Ulloa — Founder Landing</div>
+        <div class="lab-item-tech">Astro · Dasein brand · Warm paper mode</div>
+      </div>
+    </div>
+
+    <div class="lab-item lab-item--f lab-item--text reveal" style="transition-delay:.2s">
+      <div class="lab-text-label">TouchDesigner</div>
+      <div class="lab-text-stat">8</div>
+      <div class="lab-text-desc">CityRhythms · FractalGarden · SignalBloom · Interactive Particles · LumenCascade · Noise Sphere · Moving Ribs · Green BlobTracker</div>
+    </div>
+
+    <div class="lab-item lab-item--g reveal" style="transition-delay:.13s">
+      <img src="public/ss/live/hexagon.jpeg" alt="Entangled Hexagon" loading="lazy"/>
+      <div class="lab-item-overlay">
+        <div class="lab-item-title">Entangled — Hexagon distribution</div>
+        <div class="lab-item-tech">WebGL2 · GLSL · Hexagonal particle field</div>
+      </div>
+    </div>
+
+    <div class="lab-item lab-item--h lab-item--text reveal" style="transition-delay:.22s">
+      <div class="lab-text-label en">Neumorphism Principles</div>
+      <div class="lab-text-label es">Principios Neumorfismo</div>
+      <div class="lab-text-stat" style="font-size:1.6rem">CSS 3D</div>
+      <div class="lab-text-desc en">Soft shadows, inner/outer glow, depth without gradients. CSS variable system. Scss architecture.</div>
+      <div class="lab-text-desc es">Sombras suaves, brillo interior/exterior, profundidad sin gradientes. Sistema de variables CSS.</div>
+      <a href="public/demos/neumorphism.html" target="_blank" style="font-family:var(--fm);font-size:.58rem;letter-spacing:.08em;color:var(--acc);margin-top:.5rem;display:inline-flex;align-items:center;gap:.3rem">Open demo ↗</a>
+    </div>
+
+  </div>
+
+  <!-- COMPONENT CATALOG -->
+  <div class="comp-catalog reveal">
+    <div class="comp-catalog-title en">54 production components — across 5 projects, 3 frameworks</div>
+    <div class="comp-catalog-title es">54 componentes de producción — en 5 proyectos, 3 frameworks</div>
+    <div class="comp-groups">
+
+      <div>
+        <div class="comp-group-name">Motion / Interaction</div>
+        <ul class="comp-list">
+          <li data-type="tsx">MagneticButton — cursor attraction physics</li>
+          <li data-type="tsx">MotionReveal — IntersectionObserver + spring</li>
+          <li data-type="tsx">MotionText — char-by-char entrance</li>
+          <li data-type="tsx">MotionCard — tilt + depth on hover</li>
+          <li data-type="tsx">StaggerList — staggered children entrance</li>
+          <li data-type="tsx">ScrollProgress — sticky scroll indicator</li>
+          <li data-type="tsx">PageOrchestrator — cross-section choreography</li>
+          <li data-type="astro">TextSplitter — word/char split for GSAP</li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="comp-group-name">3D / WebGL / Canvas</div>
+        <ul class="comp-list">
+          <li data-type="astro">EntangledScene — WebGL2 12K spring-mass</li>
+          <li data-type="astro">ParticleScene — Three.js tube geometry</li>
+          <li data-type="astro">ParticleSea — responsive particle mesh</li>
+          <li data-type="astro">ParticleNetwork — force-directed WebGL</li>
+          <li data-type="astro">WebGLBackground — GLSL shader backdrop</li>
+          <li data-type="astro">Aurora — soft gradient blob animation</li>
+          <li data-type="astro">MouseParticles — cursor trail particles</li>
+          <li data-type="tsx">CanvasView — 60fps React canvas renderer</li>
+          <li data-type="vue">GraphPanel — 3D force-directed graph</li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="comp-group-name">Data / Complex UI</div>
+        <ul class="comp-list">
+          <li data-type="astro">SignalCarousel3D — CSS preserve-3d ring</li>
+          <li data-type="astro">Sociograma — SVG actor network graph</li>
+          <li data-type="astro">ScenarioEngine — multi-scenario selector</li>
+          <li data-type="astro">Radar — signal radar with D3</li>
+          <li data-type="astro">Monitor — real-time simulation log</li>
+          <li data-type="astro">LexiconCarousel — horizontal word scroll</li>
+          <li data-type="astro">SignalTicker — scrolling signal marquee</li>
+          <li data-type="astro">SignalCard — intelligence signal card</li>
+          <li data-type="astro">Convergences — signal convergence map</li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="comp-group-name">Forms / Controls</div>
+        <ul class="comp-list">
+          <li data-type="tsx">XYPad — 2D synth-style pad controller</li>
+          <li data-type="tsx">NumberSlider — precision numeric input</li>
+          <li data-type="tsx">PanelTabs — tabbed panel switcher</li>
+          <li data-type="tsx">SelectInput — styled dropdown</li>
+          <li data-type="tsx">GoogleFontControls — font picker</li>
+          <li data-type="tsx">OptionsPanel — collapsible settings panel</li>
+          <li data-type="tsx">MainPanel — multi-pane layout shell</li>
+          <li data-type="astro">Survey — inline question/response flow</li>
+          <li data-type="astro">ForesightAgent — streaming AI chat UI</li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="comp-group-name">Layout / Navigation</div>
+        <ul class="comp-list">
+          <li data-type="astro">CTAEyes — animated eye-track CTA</li>
+          <li data-type="astro">MagneticCTA — magnetic hover zone</li>
+          <li data-type="astro">Timeline — vertical milestone reveal</li>
+          <li data-type="astro">TierMarker — locked/open tier indicator</li>
+          <li data-type="astro">LockedSection — paywall blur overlay</li>
+          <li data-type="astro">PhaseDivider — animated section break</li>
+          <li data-type="astro">InfoTooltip — contextual tooltip</li>
+          <li data-type="vue">ToastContainer — notification stack</li>
+          <li data-type="astro">Navigation — dot-scroll side nav</li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="comp-group-name">Media / Artist / Embeds</div>
+        <ul class="comp-list">
+          <li data-type="astro">SpotifyEmbed — custom styled player</li>
+          <li data-type="astro">YouTubeGrid — responsive video grid</li>
+          <li data-type="astro">Shows — gig dates with live countdown</li>
+          <li data-type="astro">CaseShowcase — case study scroll reveal</li>
+          <li data-type="astro">ForesightAgentBubble — AI message bubble</li>
+          <li data-type="astro">EarlyAlerts — signal alert card</li>
+          <li data-type="astro">Roadmap — timeline delivery view</li>
+          <li data-type="astro">Closing — report closing sequence</li>
+          <li data-type="vue">Step1–5 — simulation wizard flow</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+</section>
+
+<!-- STACK -->
+<section id="stack">
+<div class="stack-section">
+  <div class="sec-label reveal">
+    <span class="en">Stack</span>
+    <span class="es">Stack</span>
+  </div>
+  <div class="stack-cols" data-stagger>
+    <div class="stack-col">
+      <div class="stack-col-name">Frontend</div>
+      <ul class="stack-items">
+        <li>Astro</li><li>React</li><li>Vue.js</li><li>TypeScript</li><li>CSS Custom Properties</li>
+      </ul>
+    </div>
+    <div class="stack-col">
+      <div class="stack-col-name">Motion &amp; 3D</div>
+      <ul class="stack-items">
+        <li>Three.js</li><li>WebGL2 / GLSL</li><li>Framer Motion</li><li>GSAP</li><li>Lenis</li>
+      </ul>
+    </div>
+    <div class="stack-col">
+      <div class="stack-col-name en">Backend &amp; Data</div>
+      <div class="stack-col-name es">Backend &amp; Datos</div>
+      <ul class="stack-items">
+        <li>Python / Flask</li><li>Node.js</li><li>Supabase / PostgreSQL</li><li>Neo4j</li><li>SQLite FTS5</li>
+      </ul>
+    </div>
+    <div class="stack-col">
+      <div class="stack-col-name en">AI &amp; Agents</div>
+      <div class="stack-col-name es">IA &amp; Agentes</div>
+      <ul class="stack-items">
+        <li>Claude / Anthropic SDK</li><li>AWS Bedrock</li><li>MCP Protocol</li><li>Multi-Agent Systems</li><li>LLM Pipelines / RAG</li>
+      </ul>
+    </div>
+    <div class="stack-col">
+      <div class="stack-col-name en">Infra</div>
+      <div class="stack-col-name es">Infra</div>
+      <ul class="stack-items">
+        <li>Vercel / Netlify</li><li>Docker</li><li>Git / GitHub</li><li>D3.js</li><li>Vite</li>
+      </ul>
+    </div>
+    <div class="stack-col">
+      <div class="stack-col-name en">Creative</div>
+      <div class="stack-col-name es">Creative</div>
+      <ul class="stack-items">
+        <li>TouchDesigner</li><li>After Effects</li><li>Blender</li><li>DaVinci Resolve</li><li>Ableton</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+<div class="about-section">
+  <div class="sec-label reveal">
+    <span class="en">About</span>
+    <span class="es">Sobre mí</span>
+  </div>
+  <div class="about-grid">
+    <div class="reveal-left">
+      <div class="about-photo-wrap">
+        <img src="public/pablo.jpeg" alt="Pablo Moraga"/>
+        <div class="about-photo-overlay"></div>
+        <div class="about-name-badge">
+          Pablo Moraga
+          <span class="en">Designer &amp; Builder</span>
+          <span class="es">Diseñador &amp; Constructor</span>
+        </div>
+      </div>
+    </div>
+    <div class="about-text reveal-right">
+      <h2 class="about-headline en">
+        Building<br><span class="acc">without fear</span><br>of code.
+      </h2>
+      <h2 class="about-headline es">
+        Construyo<br><span class="acc">sin miedo</span><br>al código.
+      </h2>
+      <div class="about-copy en">
+        <p>Product manager turned builder. The moment I realized I could build what I designed, I never went back.</p>
+        <p>I co-found <strong>Dasein Foresight</strong> and build the entire stack myself — landing, CRM, simulation engine, AI OS, reporting layer. Every project in this portfolio is real infrastructure, not side projects.</p>
+        <p>My edge: I understand product and code at the same time. I don't need to translate between designers and engineers because I'm both.</p>
+        <p class="aside">Also a DJ and generative art enthusiast. The shader in the hero above is mine.</p>
+      </div>
+      <div class="about-copy es">
+        <p>Product manager convertido en builder. Cuando me di cuenta de que podía construir lo que diseñaba, no volví atrás.</p>
+        <p>Co-fundo <strong>Dasein Foresight</strong> y construyo todo el stack: landing, CRM, motor de simulación, AI OS, capa de reportes. Cada proyecto en este portafolio es infraestructura real, no side projects.</p>
+        <p>Mi ventaja: entiendo producto y código al mismo tiempo. No necesito traducir entre designers y engineers porque soy los dos.</p>
+        <p class="aside">También DJ y aficionado al generative art. El shader del hero de arriba lo hice yo.</p>
+      </div>
+      <div class="about-contact">
+        <a href="https://github.com/SalvatierraPM" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          GitHub — SalvatierraPM
+        </a>
+        <a href="https://www.daseinfs.com" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+          Dasein Foresight — daseinfs.com
+        </a>
+        <a href="mailto:pablo@daseinfs.com">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 01-2.06 0L2 7"/></svg>
+          pablo@daseinfs.com
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+<div class="contact-section">
+  <div class="sec-label reveal">
+    <span class="en">Contact</span>
+    <span class="es">Contacto</span>
+  </div>
+  <h2 class="contact-headline reveal">
+    <span class="dim en">Let's work</span>
+    <span class="dim es">Trabajemos</span>
+    <br>
+    <span class="acc en">together.</span>
+    <span class="acc es">juntos.</span>
+  </h2>
+  <p class="contact-sub reveal en">Frontend project, AI system, or data pipeline to build — let's talk.</p>
+  <p class="contact-sub reveal es">Proyecto frontend, sistema IA o pipeline de datos que construir — hablemos.</p>
+  <a href="mailto:pablo@daseinfs.com" class="contact-email reveal">
+    pablo@daseinfs.com
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+  </a>
+</div>
+<div class="footer-bar" style="max-width:1200px;margin:0 auto;padding:0 2.5rem 3rem">
+  <div style="display:flex;align-items:center;gap:1rem">
+    <span class="footer-name">Pablo Moraga</span>
+    <span class="footer-copy">© 2026</span>
+  </div>
+  <div class="footer-r">
+    <a href="https://github.com/SalvatierraPM" target="_blank">GitHub</a>
+    <a href="https://www.daseinfs.com" target="_blank">Dasein</a>
+    <a href="mailto:pablo@daseinfs.com">Email</a>
+  </div>
+</div>
+</section>
+
+<script>
+/* NAV */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('solid', scrollY > 80), {passive:true});
+
+/* LANG */
+let lang = 'en';
+function toggleLang() {
+  lang = lang === 'en' ? 'es' : 'en';
+  document.body.className = 'lang-' + lang;
+  document.documentElement.lang = lang;
+  const btn = document.getElementById('lang-btn');
+  btn.textContent = lang === 'en' ? 'ES' : 'EN';
+}
+
+/* REVEAL */
+const ro = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('in');
+      ro.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => ro.observe(el));
+
+/* STAGGER stack */
+const stackCols = document.querySelectorAll('[data-stagger] .stack-col');
+stackCols.forEach((col, i) => {
+  col.classList.add('reveal');
+  col.style.transitionDelay = `${i * 70}ms`;
+  ro.observe(col);
+});
+
+/* WEBGL HERO */
+const canvas = document.getElementById('hero-c');
+const gl = canvas.getContext('webgl2');
+if (gl) {
+  const v = `#version 300 es\nin vec2 p;void main(){gl_Position=vec4(p,0,1);}`;
+  const f = `#version 300 es
+precision highp float;
+uniform vec2 res;uniform float t;
+out vec4 col;
+float g(vec2 p,vec2 c,float r){float d=length(p-c)-r;return exp(-d*d*7.0);}
+void main(){
+  vec2 uv=gl_FragCoord.xy/res;uv.y=1.-uv.y;
+  vec3 c=vec3(0);
+  c+=vec3(.72,.52,.28)*g(uv,vec2(.12+sin(t*.65)*.09,.52+cos(t*.45)*.13),.35)*.15;
+  c+=vec3(.35,.26,.70)*g(uv,vec2(.78+cos(t*.38)*.11,.28+sin(t*.58)*.11),.30)*.11;
+  c+=vec3(.06,.70,.62)*g(uv,vec2(.52+sin(t*.28)*.14,.78+cos(t*.78)*.09),.24)*.08;
+  c+=vec3(.80,.40,.18)*g(uv,vec2(.5+cos(t*.22)*.06,.5+sin(t*.18)*.05),.18)*.06;
+  vec2 ce=uv-.5;c*=max(1.-dot(ce,ce)*1.4,0.);
+  col=vec4(c,1);
+}`;
+  const cs=(type,src)=>{const s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);return s;};
+  const prog=gl.createProgram();
+  gl.attachShader(prog,cs(gl.VERTEX_SHADER,v));
+  gl.attachShader(prog,cs(gl.FRAGMENT_SHADER,f));
+  gl.linkProgram(prog);gl.useProgram(prog);
+  const buf=gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER,buf);
+  gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
+  const loc=gl.getAttribLocation(prog,'p');
+  gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
+  const uR=gl.getUniformLocation(prog,'res'),uT=gl.getUniformLocation(prog,'t');
+  const resize=()=>{canvas.width=canvas.offsetWidth*devicePixelRatio;canvas.height=canvas.offsetHeight*devicePixelRatio;gl.viewport(0,0,canvas.width,canvas.height);gl.uniform2f(uR,canvas.width,canvas.height);};
+  new ResizeObserver(resize).observe(canvas);resize();
+  let raf;
+  const draw=ts=>{gl.uniform1f(uT,ts*.001);gl.drawArrays(gl.TRIANGLE_STRIP,0,4);raf=requestAnimationFrame(draw);};
+  raf=requestAnimationFrame(draw);
+  document.addEventListener('visibilitychange',()=>{if(document.hidden)cancelAnimationFrame(raf);else raf=requestAnimationFrame(draw);});
+} else {
+  canvas.style.background='radial-gradient(ellipse at 20% 50%,rgba(196,147,90,.08) 0%,transparent 60%)';
+}
+</script>
+</body>
+</html>
